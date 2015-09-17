@@ -1,0 +1,4 @@
+Penna Model Simulation
+
+Compile with:
+  g++ -std=c++11 -Wall -Wextra -Wpedantic -Werror -o main main.cpp
