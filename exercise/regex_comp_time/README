@@ -1,0 +1,5 @@
+Regex compilation time example
+
+1. run 'make' in a terminal to compile the two binaries: fast, slow
+2. edit or touch ('touch fast.cpp') the fast.cpp and slow.cpp source files
+3. rerun 'make' and compare compilation times
