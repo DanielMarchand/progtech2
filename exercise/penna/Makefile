@@ -12,7 +12,7 @@ CPPFLAGS = -std=c++11 -O3 -Wall -Wextra -Wpedantic -Werror
 all: main
 
 # Binary targets
-main: main.o sheep.o
+main: main.o sheep.o bear.o
 	$(CXX) $(CPPFLAGS) $^ -o $@
 
 # Generic target for object binaries

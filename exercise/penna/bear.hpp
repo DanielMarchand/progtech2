@@ -1,20 +1,20 @@
 /*******************************************************************************
  *
- * Sheep Declaration
+ * bear Declaration
  * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
  * For free use, no rights reserved.
  *
  ******************************************************************************/
 
-#ifndef SHEEP_HEADER
-#define SHEEP_HEADER
+#ifndef bear_HEADER
+#define bear_HEADER
 
 #include "../extern/include/util/random.hpp"
 
 #include <vector>
 #include <ostream>
 
-class sheep {
+class bear {
     struct species_properties {
         uint gene_size;
         uint repr_age;
@@ -27,18 +27,18 @@ class sheep {
 
     public:
     // structors & assignment
-    inline sheep(uint const & age = 0): age_(age) // dual-interface
+    inline bear(uint const & age = 0): age_(age) // dual-interface
                                       , bad_genes_(0)
                                       , gene_(prop.gene_size) {
         ++prop.N_t;
     }
-    inline sheep(sheep const & rhs): age_(rhs.age_)
+    inline bear(bear const & rhs): age_(rhs.age_)
                                    , bad_genes_(rhs.bad_genes_)
                                    , gene_(rhs.gene_) {
         ++prop.N_t;
     }
 
-    inline ~sheep() {
+    inline ~bear() {
         --prop.N_t;
     }
     
@@ -49,9 +49,9 @@ class sheep {
     inline bool adult() const {
         return age_ >= prop.repr_age;
     }
-    sheep make_child() const;
+    bear make_child() const;
     inline std::string name() const {
-        return "sheep";
+        return "bear";
     }
     void print(std::ostream & os) const;
 
@@ -77,6 +77,6 @@ class sheep {
 };
 
 // free functions
-std::ostream & operator<<(std::ostream & os, sheep const & arg);
+std::ostream & operator<<(std::ostream & os, bear const & arg);
 
-#endif //SHEEP_HEADER
+#endif //bear_HEADER
