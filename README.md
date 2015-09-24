@@ -7,5 +7,4 @@
 
 * [Exercise Sheets](exercise_sheets/main.md)
 * [Lecture Slides](slides/main.md)
-
 * [Best Practice Wiki](wiki/main.md)
