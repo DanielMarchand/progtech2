@@ -10,9 +10,10 @@ SOURCE = ./
 BUILD = ./
 
 # Our targets and headers that correspond to an object
-OBJECTS_1 = $(BUILD)/main.o $(BUILD)/sheep.o
+OBJECTS_1 = $(BUILD)/main.o $(BUILD)/sheep.o $(BUILD)/bear.o
 BINARY_1 = main
 HEADER_WITH_OBJ = $(SOURCE)/sheep.hpp
+HEADER_WITH_OBJ += $(SOURCE)/bear.hpp
 # adding new name.o <-> name.hpp couplings with: HEADER_WITH_OBJ += sheep2.hpp
 
 # Default target

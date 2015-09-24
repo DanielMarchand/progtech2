@@ -1,19 +1,19 @@
 /*******************************************************************************
  *
- * Sheep Definition
+ * bear Definition
  * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
  * For free use, no rights reserved.
  *
  ******************************************************************************/
 
-#include "sheep.hpp"
 #include "bear.hpp"
+#include "sheep.hpp"
 
 // structors
 // all inline for speed
 
 // modifying methods
-bool sheep::progress() {
+bool bear::progress() {
     bad_genes_ += gene_[age_];
     age_ += 1;
 
@@ -26,15 +26,15 @@ bool sheep::progress() {
     if(age_ == prop.gene_size) { // too old
         return false;
     }
-    if(prob_rng() > (1 - 0.1*bear::prop.N_t / double(sheep::prop.N_t))) {
+    if(prob_rng() > sheep::prop.N_t / double(2*bear::prop.N_t)) {
         return false;
     }
     
     return true;
 }
 
-sheep sheep::make_child() const {
-    sheep child;
+bear bear::make_child() const {
+    bear child;
     child.gene_ = gene_; // copy gene
 
     for(uint i = 0; i < prop.mut_rate; ++i) { // mutate some gene
@@ -44,7 +44,7 @@ sheep sheep::make_child() const {
     return child;
 }
 
-void sheep::print(std::ostream & os) const {
+void bear::print(std::ostream & os) const {
     os << name() << ": (age: " << age_ << "): ";
     for(uint i = 0; i < gene_.size(); ++i) {
         os << "\033[0;";
@@ -66,20 +66,20 @@ void sheep::print(std::ostream & os) const {
 }
 
 // static methods
-void sheep::set_gene_size(uint const & gene_size) {
+void bear::set_gene_size(uint const & gene_size) {
     prop.gene_size = gene_size;
     gene_rng.set_range(0, prop.gene_size - 1);
 }
 
 // static membes
-sheep::species_properties sheep::prop;
+bear::species_properties bear::prop;
 
 // gene_rng has to be set again via set_gene_size
-util::rng_class<uint> sheep::gene_rng(0, sheep::prop.gene_size - 1);
-util::rng_class<double> sheep::prob_rng(0, 1);
+util::rng_class<uint> bear::gene_rng(0, bear::prop.gene_size - 1);
+util::rng_class<double> bear::prob_rng(0, 1);
 
 // free functions
-std::ostream & operator<<(std::ostream & os, sheep const & arg) {
+std::ostream & operator<<(std::ostream & os, bear const & arg) {
     arg.print(os);
     return os;
 }
