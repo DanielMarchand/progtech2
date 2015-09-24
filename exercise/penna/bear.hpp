@@ -6,8 +6,8 @@
  *
  ******************************************************************************/
 
-#ifndef bear_HEADER
-#define bear_HEADER
+#ifndef BEAR_HEADER
+#define BEAR_HEADER
 
 #include "../extern/include/util/random.hpp"
 
@@ -79,4 +79,4 @@ class bear {
 // free functions
 std::ostream & operator<<(std::ostream & os, bear const & arg);
 
-#endif //bear_HEADER
+#endif //BEAR_HEADER
