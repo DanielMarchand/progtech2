@@ -1,6 +1,7 @@
 ## New 24.09.2015
-* [Exercise Sheet Week 2](exercise_sheets/pt2_hs15_ex02.pdf)
-* [Lecture Slides Week 2](slides/pt2_hs15_week02.pdf)
+* [Exercise Sheet Week 02](exercise_sheets/pt2_hs15_ex02.pdf)
+* [Lecture Slides Week 02](slides/pt2_hs15_week02.pdf)
+* [Lecture Slides Code Examples Week 02](slides/slide_code_examples_week02)
 * [One Dimensional Vegetables](exercise/vtable/vtable.cpp)
 * [Flat Bear Penna Code](exercise/penna)
 
