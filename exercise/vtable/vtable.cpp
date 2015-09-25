@@ -32,7 +32,7 @@ std::string print_color(VColor const & color) {
         case VColor::orange:
             return "nice orange";
         case VColor::yellow:
-            return "no so ripe yellow";
+            return "not so ripe yellow";
         case VColor::green:
             return "juicy green";
         case VColor::brown:
@@ -126,7 +126,7 @@ int main() {
         vp->grow(5.1_growth_per_month);
     }
     
-    // age one carrot until it rotts
+    // age one carrot until it rots
     time = 100_days;
     while(time--)
         vp->grow(5.1_growth_per_month);
