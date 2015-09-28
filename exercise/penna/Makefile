@@ -17,7 +17,7 @@ HEADER_WITH_OBJ += $(SOURCE)/bear.hpp
 # adding new name.o <-> name.hpp couplings with: HEADER_WITH_OBJ += sheep2.hpp
 
 # Default target
-all: $(BINARY_1)
+all: $(BUILD)/$(BINARY_1)
 
 # Make sure these targets are not seen as files
 .PHONY: all clean
@@ -39,5 +39,5 @@ $(subst $(SOURCE), $(BUILD), $(addsuffix .o,$(basename $(FILENAME)) )): $(FILENA
 
 # Cleanup
 clean:
-	rm -f main
-	rm -f *.o
+	rm -f $(BUILD)/$(BINARY_1)
+	rm -f $(BUILD)/*.o
