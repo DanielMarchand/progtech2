@@ -32,7 +32,7 @@ std::string print_color(VColor const & color) {
         case VColor::orange:
             return "nice orange";
         case VColor::yellow:
-            return "no so ripe yellow";
+            return "not so ripe yellow";
         case VColor::green:
             return "juicy green";
         case VColor::brown:
@@ -53,10 +53,10 @@ class OneDimVegetable {
         length_ += d;
         weight_ += d * get_linear_density();
     }
-    
+
     virtual inline double get_length() final { return length_; }
     virtual inline double get_weight() final { return weight_; }
-    virtual double get_linear_density() = 0; // since we cannot have virtual static...
+    virtual double get_linear_density() const = 0; // since we cannot have virtual static...
     virtual void expire() = 0;
 
     protected:
@@ -64,7 +64,6 @@ class OneDimVegetable {
     double length_ = 0;                        // length in cm
     double weight_ = 0;                        // weight in grams
     VColor color_ = VColor::none;              // color
-
 };
 
 // Class for carrots
@@ -73,7 +72,7 @@ class Carrot : public OneDimVegetable {
     inline std::string get_name() const override { 
         return print_color(color_) + " carrot"; 
     }
-    virtual inline double get_linear_density() override {
+    virtual inline double get_linear_density() const override {
         return linear_carrot_density_;
     }
     virtual void expire() override {
@@ -87,7 +86,6 @@ class Carrot : public OneDimVegetable {
     private:
     static constexpr double linear_carrot_density_ = 4.5;
     static constexpr uint32_t expiration_time_ = 100_days;
-    
 };
 
 // Class for cucumbers
@@ -96,7 +94,7 @@ class Cucumber : public OneDimVegetable {
     inline std::string get_name() const override { 
         return print_color(color_) + " cucumber"; 
     }
-    virtual inline double get_linear_density() override {
+    virtual inline double get_linear_density() const override {
         return linear_cucumber_density_;
     }
     virtual void expire() override {
@@ -117,20 +115,20 @@ int main() {
     Cucumber cu;
     auto cap = new Carrot();
     OneDimVegetable * vp = new Carrot();
-    
+
     // Growth rates per month curtesy from Wikipedia. They vary.
-    while(time--)  {
+    while(time--) {
         ca.grow(4.9_growth_per_month);
         cu.grow(100_growth_per_month);
         cap->grow(5_growth_per_month);
         vp->grow(5.1_growth_per_month);
     }
-    
-    // age one carrot until it rotts
+
+    // age one carrot until it rots
     time = 100_days;
     while(time--)
         vp->grow(5.1_growth_per_month);
-        
+
     // print all the grown vegetables
     std::cout << std::setprecision(3);
     std::cout << ca.get_name() << ":\t\t length " << ca.get_length()
