@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * Penna Simulation Code
+ * PennaLV Simulation Code
  * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
  * For free use, no rights reserved. <- use license (discussion)
  *
