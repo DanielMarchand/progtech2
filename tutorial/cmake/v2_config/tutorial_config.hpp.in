@@ -1,0 +1,8 @@
+#ifndef TUTORIAL_CONFIG_HEADER
+#define TUTORIAL_CONFIG_HEADER
+
+constexpr int v_major = @version_major@;
+constexpr int v_minor = @version_minor@;
+constexpr double input_nr = @custom_variable@;
+
+#endif //TUTORIAL_CONFIG_HEADER
