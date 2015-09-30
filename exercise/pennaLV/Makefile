@@ -6,14 +6,16 @@ CXX = g++
 CPPFLAGS = -std=c++11 -O3 -Wall -Wextra -Wpedantic -Werror
 
 # The base source and target directories
-SOURCE = ./
-BUILD = ./
+SOURCE = ./src
+BUILD = ./build
+INCLUDE_DIR = ../extern/include
 
 # Our targets and headers that correspond to an object
-OBJECTS_1 = $(BUILD)/main.o $(BUILD)/sheep.o $(BUILD)/bear.o
+OBJECTS_1 = $(BUILD)/main.o $(BUILD)/zoo/animal.o $(BUILD)/zoo/sheep.o $(BUILD)/zoo/bear.o
 BINARY_1 = main
-HEADER_WITH_OBJ = $(SOURCE)/sheep.hpp
-HEADER_WITH_OBJ += $(SOURCE)/bear.hpp
+HEADER_WITH_OBJ  = $(SOURCE)/zoo/animal.hpp
+HEADER_WITH_OBJ += $(SOURCE)/zoo/sheep.hpp
+HEADER_WITH_OBJ += $(SOURCE)/zoo/bear.hpp
 # adding new name.o <-> name.hpp couplings with: HEADER_WITH_OBJ += sheep2.hpp
 
 # Default target
@@ -27,10 +29,14 @@ $(BUILD)/$(BINARY_1): $(OBJECTS_1)
 	@echo ">" building $@
 	$(CXX) $(CPPFLAGS) $^ -o $@
 
+$(BUILD)/%.o: $(SOURCE_1)/%.cpp
+	@echo ">" source_1 rule for $@
+	$(CXX) $(CPPFLAGS) $< -c -o $@ -I $(INCLUDE_DIR)
+
 # Generic target for object binaries. Appending %.hpp doesn't match this rule on main.cpp
 $(BUILD)/%.o: $(SOURCE)/%.cpp
 	@echo ">" generic rule for $@
-	$(CXX) $(CPPFLAGS) $< -c -o $@
+	$(CXX) $(CPPFLAGS) $< -c -o $@ -I $(INCLUDE_DIR)
 
 # Workaround: adds trigger on headers modification (obj.o: obj.hpp)
 $(foreach FILENAME, $(HEADER_WITH_OBJ), $(eval \

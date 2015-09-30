@@ -6,15 +6,19 @@
  *
  ******************************************************************************/
 
-#include "../extern/include/util/random.hpp"
-#include "sheep.hpp"
-#include "bear.hpp"
-
 #include <list>
 #include <fstream>
 #include <iostream>
 
+#include "zoo/bear.hpp"
+#include "zoo/sheep.hpp"
+#include "zoo/animal.hpp"
+#include "util/random.hpp"
+
 int main() {
+    // just put everything in a namespace i.o. not to polute the global one
+    using namespace zoo;
+    
     // seed random number generator engine
     util::seed<>(0);
 
@@ -33,19 +37,17 @@ int main() {
     bear::prop.N_max = 1000;
     bear::prop.N_init = 1000;
 
-    // generate initial population
-    std::list<sheep> pop;
+    // generate initial population (can hold sheep & bear now)
+    std::list<animal*> pop;
 
-    for(uint i = 0; i < sheep::prop.N_init; ++i) {
-        pop.push_back(sheep(sheep::random_age()));
-    }
-    std::list<bear> popb;
-    for(uint i = 0; i < bear::prop.N_init; ++i) {
-        popb.push_back(bear(bear::random_age()));
-    }
+    for(uint64_t i = 0; i < sheep::prop.N_init; ++i)
+        pop.push_back(new sheep(sheep::random_age()));
+    
+    for(uint64_t i = 0; i < bear::prop.N_init; ++i)
+        pop.push_back(new bear(bear::random_age()));
 
     // prepare output file
-    std::ofstream of("penna.txt");
+    std::ofstream of("pennaLV.txt");
     of << "time sheep bear" << std::endl;
     of << "#param"
        << " seed " << util::seed<>()
@@ -64,28 +66,18 @@ int main() {
        << std::endl;
 
     // run simulation
-    for(uint i = 0; i < 300; ++i) {
-        for(std::list<sheep>::iterator it = pop.begin();  it != pop.end(); ++it) {
-            auto su = not (*it).progress();
-            if(su) {
+    for(uint32_t i = 0; i < 300; ++i) {
+        for(auto it = pop.begin();  it != pop.end(); ++it) {
+            auto * ap = (*it); // makes notation less confusing since it is
+                               // a "pointer" to a pointer
+            auto dead = not ap->progress();
+            if(dead) {
+                delete ap; // super important! otherwise memory-leak
                 it = pop.erase(it);
                 --it;
             } else {
-                auto ad = it->adult();
-                if(ad) {
-                    pop.push_front((*it).make_child());
-                }
-            }
-        }
-        for(std::list<bear>::iterator it = popb.begin();  it != popb.end(); ++it) {
-            auto su = not (*it).progress();
-            if(su) {
-                it = popb.erase(it);
-                --it;
-            } else {
-                auto ad = it->adult();
-                if(ad) {
-                    popb.push_front((*it).make_child());
+                if(ap->adult()) {
+                    pop.push_front(ap->make_child());
                 }
             }
         }
@@ -95,8 +87,10 @@ int main() {
 
     // print population size
     std::cout << "sheep count " << sheep::prop.N_t << std::endl;
+    std::cout << "bear  count " <<  bear::prop.N_t << std::endl;
     if(pop.size())
-        std::cout << "last " << pop.back() << std::endl;
+        std::cout << "last " << *pop.back() << std::endl;
 
     return 0;
 }
+
