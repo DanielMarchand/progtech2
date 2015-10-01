@@ -54,8 +54,8 @@ class OneDimVegetable {
         weight_ += d * get_linear_density();
     }
 
-    virtual inline double get_length() final { return length_; }
-    virtual inline double get_weight() final { return weight_; }
+    virtual inline double get_length() const final { return length_; }
+    virtual inline double get_weight() const final { return weight_; }
     virtual double get_linear_density() const = 0; // since we cannot have virtual static...
     virtual void expire() = 0;
 
