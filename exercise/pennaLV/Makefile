@@ -29,10 +29,6 @@ $(BUILD)/$(BINARY_1): $(OBJECTS_1)
 	@echo ">" building $@
 	$(CXX) $(CPPFLAGS) $^ -o $@
 
-$(BUILD)/%.o: $(SOURCE_1)/%.cpp
-	@echo ">" source_1 rule for $@
-	$(CXX) $(CPPFLAGS) $< -c -o $@ -I $(INCLUDE_DIR)
-
 # Generic target for object binaries. Appending %.hpp doesn't match this rule on main.cpp
 $(BUILD)/%.o: $(SOURCE)/%.cpp
 	@echo ">" generic rule for $@
