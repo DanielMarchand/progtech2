@@ -32,8 +32,7 @@ add_executable(main main.cpp)
 target_link_libraries(main ${EXTRA_LIBS}) #extra_lib can be empty
 
 # ================ install
-install(TARGETS main DESTINATION bin)
-install(FILES ${PROJECT_SOURCE_DIR}/tutorial_config.hpp DESTINATION include)
+#~ install(TARGETS main DESTINATION bin)
 
 # ================ testing
 add_test(main_test main) # if return != 0 -> fail

@@ -18,7 +18,7 @@ int main() {
     #ifdef USE_MYSQRT
         std::cout << "the my_sqrt is: " << my_sqrt(a) << std::endl;
     #else
-        std::cout << "the sqrt is:    " << sqrt(a) << std::endl;
+        std::cout << "the sqrt is:    " << std::sqrt(a) << std::endl;
     #endif
     
     return 0;

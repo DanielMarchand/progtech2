@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 project(cmake_tutorial)
 
 # ================ compiler
-set(CMAKE_CXX_FLAGS "-std=c++11 -O3")
+set(CMAKE_CXX_FLAGS "-std=c++11")
 
 # ================ include dirs
 include_directories(${PROJECT_SOURCE_DIR}/my_math_lib)

@@ -6,7 +6,7 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -O3")
 
 # ================ set variables
 set(version_major 2)
-set(version_minor 0)
+set(version_minor 1)
 set(custom_variable 25)
 
 # ================ config

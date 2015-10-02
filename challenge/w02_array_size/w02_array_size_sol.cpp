@@ -11,8 +11,8 @@
 using uint = uint64_t; // since it is not available without an 
                        // include of certain libc-implementations
 
-template<typename T, uint N>
-constexpr uint array_size(T const (&)[N]) { // you dont need to (&name) the array
+template<uint N>
+constexpr uint array_size(int const (&)[N]) { // you dont need to (&name) the array
     return N;
 }
 
