@@ -2,7 +2,7 @@
 * [Exercise Sheet Week 03](exercise_sheets/pt2_hs15_ex03.pdf)
 * [Lecture Slides Week 03](slides/pt2_hs15_week03.pdf)
 * [One Dimensional Vegetables CRTP](exercise/vtable/crtp.cpp)
-* [Dynamic Polymorphic Penna Code](exercise/penna)
+* [Dynamic Polymorphic Penna Code](exercise/pennaLV)
 * [vTable Lookup](wiki/vTable-lookup.pdf)
 * [CMake Examples](tutorial/cmake)
 
