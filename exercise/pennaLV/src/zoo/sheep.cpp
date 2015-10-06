@@ -55,7 +55,7 @@ namespace zoo {
     species_properties sheep::prop;
 
     // gene_rng has to be set again via set_gene_size
-    util::rng_class<uint> sheep::gene_rng(0, sheep::prop.gene_size - 1);
+    util::rng_class<age_type> sheep::gene_rng(0, sheep::prop.gene_size - 1);
     util::rng_class<double> sheep::prob_rng(0, 1);
     
 }//end namespace zoo
