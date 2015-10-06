@@ -55,7 +55,7 @@ namespace zoo {
         public:
         static species_properties prop;
         private:
-        static util::rng_class<uint> gene_rng;
+        static util::rng_class<age_type> gene_rng;
         static util::rng_class<double> prob_rng;
     };
     
