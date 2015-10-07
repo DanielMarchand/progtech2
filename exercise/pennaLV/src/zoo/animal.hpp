@@ -36,12 +36,12 @@ namespace zoo {
         virtual ~animal() = 0; // virtual here is important!
         
         // structors & assignment
-        inline animal(age_type const & age
+        animal(age_type const & age
                     , age_type const & gene_size): age_(age)
                                                  , bad_genes_(0)
                                                  , gene_(gene_size) {}
         
-        inline animal(animal const & rhs) = default; // for clarity
+        animal(animal const & rhs) = default; // for clarity
         
         // modifying methods
         virtual bool progress() = 0;

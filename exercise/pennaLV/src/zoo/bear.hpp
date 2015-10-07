@@ -9,54 +9,25 @@
 #ifndef BEAR_HEADER
 #define BEAR_HEADER
 
-#include <vector>
-#include <ostream>
+#include <string>
 
-#include "animal.hpp"
-#include "util/random.hpp"
+#include "animal_crtp.hpp"
 
 namespace zoo {
 
-    class bear: public animal {
-        using super = animal;
+    class bear: public animal_crtp<bear> {
+        using super = animal_crtp<bear>;
         
         public:
         // structors & assignment
-        inline bear(age_type const & age = 0): super(age, prop.gene_size) {
-            ++prop.N_t;
+        bear(age_type const & age = 0): super(age) {
         }
-        inline bear(bear const & rhs): super(rhs) {
-            ++prop.N_t;
+        bear(bear const & rhs): super(rhs) {
         }
-        inline ~bear() {
-            --prop.N_t;
-        }
+        static double interaction();
         
-        // modifying methods
-        bool progress() override;
-
-        // const methods
-        inline bool adult() const override {
-            return age_ >= prop.repr_age;
-        }
-        bear * make_child() const override; // will still override animal * make_child()
-        inline std::string name() const override {
-            return "bear";
-        }
-
-        // static methods
-        inline static age_type random_age() {
-            return gene_rng();
-        }
-        
-        static void set_gene_size(age_type const & gene_size);
-
-        // static members
         public:
-        static species_properties prop;
-        private:
-        static util::rng_class<age_type> gene_rng;
-        static util::rng_class<double> prob_rng;
+        static const std::string name;
     };
     
 }//end namespace zoo

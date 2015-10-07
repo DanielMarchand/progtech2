@@ -1,6 +1,7 @@
 PennaLV Model Simulation
 
 Compile with:
+mkdir build
+cd build
+cmake ..
 make
-
-make sure you have a folder "build" and "build/zoo" created

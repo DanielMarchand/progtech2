@@ -10,10 +10,10 @@
 #include <fstream>
 #include <iostream>
 
-#include "zoo/bear.hpp"
-#include "zoo/sheep.hpp"
-#include "zoo/animal.hpp"
-#include "util/random.hpp"
+#include <zoo/bear.hpp>
+#include <zoo/sheep.hpp>
+#include <zoo/animal.hpp>
+#include <util/random.hpp>
 
 int main() {
     // just put everything in a namespace i.o. not to polute the global one
