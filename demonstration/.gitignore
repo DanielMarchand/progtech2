@@ -1,0 +1,4 @@
+throw_in_dtor
+vtable/base_slicing
+vtable/method_ptr
+vtable/vtable_reset
