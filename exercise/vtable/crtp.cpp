@@ -111,28 +111,6 @@ class Cucumber : public OneDimVegetable<Cucumber> {
     static constexpr double linear_density_ = 7.5;
     static constexpr uint32_t expiration_time_ = 130_days;
 };
-//~ template <>
-//~ const std::string OneDimVegetable<Cucumber>::name = "cucumber";
-/*
- * Let's talk about statics:  Todo
- *
- * static int x = 4; // causes static linkage
- * void func() {
- *   static int y = 0;  // no linkage, local
- *   ++y;
- * }
- * class Foo {
-     public:
-     static int z;  // external linkage 
-     private:
-     
- };
- Foo::z = 4; // in a different .cpp -> .o
- main() {
-   std::cout << Foo::z << std::endl;
- }
- * 
- */
 
 int main() {
 
