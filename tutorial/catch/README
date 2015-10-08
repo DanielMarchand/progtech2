@@ -1,0 +1,14 @@
+Example of how to use a the "catch" testing framework
+
+You can find catch on Github
+https://github.com/philsquared/Catch
+Here we use the single_include header
+add the catch.hpp to exercise/extern/include
+
+Please study the documentation of Catch on Github
+
+Compile with:
+mkdir build
+cd build
+cmake ..
+make
