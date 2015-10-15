@@ -13,6 +13,8 @@
 #include "counter_crtp.hpp"
 #include "util/random.hpp"
 
+#include <memory>
+
 namespace zoo {
     template<typename T>
     class animal_crtp: public animal, public counter_crtp<animal_crtp<T>> {
@@ -50,8 +52,8 @@ namespace zoo {
             return age_ >= prop.repr_age;
         }
 
-        animal_crtp * make_child() const override {
-            animal_crtp * child = new animal_crtp();
+        std::shared_ptr<animal> make_child() const override {
+            std::shared_ptr<animal_crtp> child(new animal_crtp());
             child->gene_ = gene_; // copy gene
 
             for(mut_type i = 0; i < prop.mut_rate; ++i) { // mutate some gene
@@ -83,7 +85,7 @@ namespace zoo {
         static util::rng_class<double> prob_rng;
     };
 
-    // static membes
+    // static members
     template<typename T>
     species_properties animal_crtp<T>::prop;
 

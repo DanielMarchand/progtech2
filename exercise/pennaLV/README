@@ -5,3 +5,8 @@ mkdir build
 cd build
 cmake ..
 make
+
+Run tests after build:
+./src/all_tests
+optionally you can use (but not preferred method as output is limited):
+make test

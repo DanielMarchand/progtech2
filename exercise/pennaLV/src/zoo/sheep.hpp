@@ -20,9 +20,9 @@ namespace zoo {
         
         public:
         // structors & assignment
-        sheep(age_type const & age = 0): super(age) {
+        inline sheep(age_type const & age = 0): super(age) {
         }
-        sheep(sheep const & rhs): super(rhs) {
+        inline sheep(sheep const & rhs): super(rhs) {
         }
         static double interaction();
         

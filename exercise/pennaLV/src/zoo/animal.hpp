@@ -9,6 +9,7 @@
 #ifndef ANIMAL_HEADER
 #define ANIMAL_HEADER
 
+#include <memory>
 #include <vector>
 #include <iostream>
 
@@ -48,7 +49,7 @@ namespace zoo {
 
         // const methods
         virtual bool adult() const = 0;
-        virtual animal * make_child() const = 0;
+        virtual std::shared_ptr<animal> make_child() const = 0;
         virtual std::string name() const = 0;
         virtual void print(std::ostream & os) const;
 

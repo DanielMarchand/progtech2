@@ -1,0 +1,10 @@
+Run
+  make
+to see the list of available targets.
+Running one of the targets below will build and also execute them. Check the output and analyse the corresponding source files to understand it.
+
+01_local - static local variables without linkage
+
+02_global - static global variables/functions and internal/external linkage
+
+03_member - static class member/methods and internal/external linkage

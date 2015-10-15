@@ -16,7 +16,7 @@
 #include <util/random.hpp>
 
 int main() {
-    // just put everything in a namespace i.o. not to polute the global one
+    // just put everything in a namespace i.o. not to pollute the global one
     using namespace zoo;
     
     // seed random number generator engine
@@ -38,13 +38,17 @@ int main() {
     bear::prop.N_init = 1000;
 
     // generate initial population (can hold sheep & bear now)
-    std::list<animal*> pop;
+    std::list<std::shared_ptr<animal>> pop;
 
-    for(uint64_t i = 0; i < sheep::prop.N_init; ++i)
-        pop.push_back(new sheep(sheep::random_age()));
+    for(uint64_t i = 0; i < sheep::prop.N_init; ++i) {
+        std::shared_ptr<animal> s(new sheep(sheep::random_age()));
+        pop.push_back(s);
+    }
     
-    for(uint64_t i = 0; i < bear::prop.N_init; ++i)
-        pop.push_back(new bear(bear::random_age()));
+    for(uint64_t i = 0; i < bear::prop.N_init; ++i) {
+        std::shared_ptr<animal> b(new bear(bear::random_age()));
+        pop.push_back(b);
+    }
 
     // prepare output file
     std::ofstream of("pennaLV.txt");
@@ -68,11 +72,10 @@ int main() {
     // run simulation
     for(uint32_t i = 0; i < 300; ++i) {
         for(auto it = pop.begin();  it != pop.end(); ++it) {
-            auto * ap = (*it); // makes notation less confusing since it is
-                               // a "pointer" to a pointer
+            auto & ap = (*it);
+            
             auto dead = not ap->progress();
             if(dead) {
-                delete ap; // super important! otherwise memory-leak
                 it = pop.erase(it);
                 --it;
             } else {
