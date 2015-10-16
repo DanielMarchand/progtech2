@@ -1,0 +1,13 @@
+Demonstration files for debugging with gdb and lldb.
+
+Compile the programs with -g -O0 and load them into a debugger (either as a
+command line argument or with the 'file' command), then follow the instructions
+in the file headers.
+
+An overview of the commands can be found here:
+http://lldb.llvm.org/lldb-gdb.html
+
+There are graphical environments to aid debugging (on GNU/Linux):
+  ddd, Nemiver
+Many editors have built-in or plug-in support for gdb/lldb:
+  CodeBlocks, Geany, XCode, KDevelop, NetBeans, Eclipse, ...
