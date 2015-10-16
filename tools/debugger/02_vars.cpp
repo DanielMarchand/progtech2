@@ -4,9 +4,9 @@
  * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
  * For free use, no rights reserved.
  *
- * Set a breakpoint at the push_back line and run the program.
- * Check the vector ('print v') after iterating with 'c' ('continue') or 'n'
- * ('next' line).
+ * Set a breakpoint ('b 02_vars.cpp:63') at the push_back line and run the
+ * program. Check the vector ('print v') after iterations with 'c' ('continue')
+ * or 'n' ('next' line).
  * Also check the position of the vector implementation, which are the values of
  * the pointers
  *   v._M_impl._M_start, v._M_impl._M_finish and v._M_impl._M_end_of_storage,
