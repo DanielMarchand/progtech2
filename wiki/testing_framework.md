@@ -1,6 +1,6 @@
 # Testing
 
-## What do we expect from our testing framework?
+### What do we expect from our testing framework?
 
 * easy to use (make test)
 * platform independent

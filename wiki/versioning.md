@@ -1,40 +1,42 @@
-# How do we want to work?
+# Version Control
 
-* together with other developers
-* keep track of what we have done
-* undo to any point back in time
-* keep efficient and secure backup of files
-* publish our work
+### Why do we need version control?
 
-# Why version control?
+* ___keep track___ of what we have done and ___revert___ to previous versions
+* ___share___ our work
+* efficiently ___work together___ with other developers
 
-* collaboration -> work on a project with other people
-* annotated work history -> keep track of workflow
-* can undo back in time -> go back to previous versions of your work
-* secure backup -> store files on remote server
-* compressed storage -> only store minimum ammount of data reproduce all files
-* multiple branches -> work on different implementations of an idea
+### What do we expect from our version control tool?
+
+* ___fetch___ code from others
+* allow work on ___different features concurrently___
+* facilitate easy ___merging___ of diverged code
+* provide ___annotated work history___
+* ___browse and switch___ to any point in history
+* ___remotely store___ and ___publish___ files on a server
+* store data compressed for minimum size
+* easy to use
+* fast operation
 
 ## Git
 
-In this course we will use [Git](https://git-scm.com).<br> 
-A server is maintained by ETH on [GitLab](https://gitlab.phys.ethz.ch) and a [global one](https://github.com)<br>
-Nice [tutorial](https://www.atlassian.com/git/tutorials/) can be found online.<br>
-
+In this course we will use [Git](https://git-scm.com).<br /> 
+A [GitLab](https://gitlab.phys.ethz.ch) server is maintained by ETH D-PHYS, and there is a [global one](https://github.com).<br />
+A nice [tutorial](https://www.atlassian.com/git/tutorials/) can be found online.<br />
 
 ## Other version control systems
 
-#### repository model
-server/client -> clients have only working copy of repository tree. communitate with server on every commit<br>
-distributed -> clients have working copy + local repository. communicate with server for sync with other clients<br>
+#### Repository model
+Server/client -> clients have only working copy of repository tree. communitate with server on every commit<br />
+Distributed -> clients have working copy + local repository. communicate with server for sync with other clients<br />
 
-#### concurrency model
-lock -> only serial working on files is possible through locks<br>
-merge -> allows concurrent working on files, but requires automatic or manual merge to resolve conflicts<br>
+#### Concurrency model
+Lock -> only serial working on files is possible through locks<br />
+Merge -> allows concurrent working on files, but requires automatic or manual merge to resolve conflicts<br />
 
-#### storage model
-changeset -> only difference to previous or next version of a file is stored<br>
-snapshot -> files stored as a whole in compressed format<br>
+#### Storage model
+Changeset -> only difference to previous or next version of a file is stored<br />
+Snapshot -> files stored as a whole in compressed format<br />
 
 
 |             | cvs           | svn                    | git         | hg          | perforce                 |

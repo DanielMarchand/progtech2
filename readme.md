@@ -8,6 +8,6 @@
 
 ## Content
 
-* [Exercise Sheets](task_sheets/main.md)
-* [Lecture Slides](slides/main.md)
-* [Best Practice Wiki](wiki/main.md)
+* [Exercise Sheets](task_sheets/readme.md)
+* [Lecture Slides](slides/readme.md)
+* [Course Wiki](wiki/readme.md)
