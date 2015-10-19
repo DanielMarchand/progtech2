@@ -1,12 +1,10 @@
 ## New 08.10.2015
-* [Exercise Sheet Week 04](task_sheets/pt2_hs15_ex04.pdf)
-* Lecture Slides Week 04 will be handed out in the lecture
-* [Catch Examples](tutorial/catch)
-* [vTable Example](exercise/virtual_table)
-* [Throwing dtor (bad!)](exercise/throw_in_dtor/main.cpp)
-* [Bug Hunt Challenge Code](challenge/w04_bug_hunt)
-* [Tanks Code](exercise/tanks/brave_tanks.cpp)
-* [CRTP PennaLV Code](exercise/pennaLV)
+* [Exercise Sheet Week 05](task_sheets/pt2_hs15_ex05.pdf)
+* [Slides Week 05](slides/pt2_hs15_week05.pdf)
+* [Debugger Examples](tools/debugger)
+* No challenge this week
+* [Safe Tanks Code](exercise/tanks/safe_tanks.cpp)
+* [PennaLV Code](exercise/pennaLV)
 
 ## Content
 
