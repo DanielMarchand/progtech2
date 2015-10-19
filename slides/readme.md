@@ -1,4 +1,4 @@
-Slides Week 01 as hard copy
+Slides Week 01 will be handed out
 
 [Slides Week 02](pt2_hs15_week02.pdf)
 
