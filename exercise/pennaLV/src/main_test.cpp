@@ -66,7 +66,7 @@ TEST_CASE("Functional Test of main", "[mainTest]") {
 
   // Check end of simulation
   INFO("Some of your numerics changed! Might be a bug or not!");
-  CHECK(sheep::prop.N_t == 95);
-  CHECK(bear::prop.N_t == 55);
+  CHECK(sheep::prop.N_t == 108);
+  CHECK(bear::prop.N_t == 57);
 
 }
