@@ -9,15 +9,15 @@
 #ifndef ANIMAL_CRTP_HEADER
 #define ANIMAL_CRTP_HEADER
 
+#include "zoo.hpp"
 #include "animal.hpp"
-#include "counter_crtp.hpp"
-#include "util/random.hpp"
+#include <util/random.hpp>
 
 #include <memory>
 
 namespace zoo {
     template<typename T>
-    class animal_crtp: public animal, public counter_crtp<animal_crtp<T>> {
+    class animal_crtp: public animal {
         using super = animal;
         public:
         // structors
@@ -27,20 +27,22 @@ namespace zoo {
         // virtual ~animal_crtp() {}
 
         // modifying methods
-        bool progress() override {
+        bool progress(sim::count_array const & N_max
+                    , sim::count_array const & N_t) override {
             bad_genes_ += gene_[age_];
             age_ += 1;
 
             if(bad_genes_ >= prop.threshold) { // darwin selection
                 return false;
             }
-            if(prob_rng() > (1 - double(prop.N_t) / prop.N_max)) { // resource selection
+            
+            if(prob_rng() > (1 - double(N_t[T::index]) / N_max[T::index])) { // resource selection
                 return false;
             }
             if(age_ == prop.gene_size) { // too old
                 return false;
             }
-            if(prob_rng() > T::interaction()) {
+            if(prob_rng() > T::interaction(N_t)) {
                 return false;
             }
 
@@ -51,7 +53,9 @@ namespace zoo {
         inline bool adult() const override {
             return age_ >= prop.repr_age;
         }
-
+        inline tag::zoo_enum index() const override {
+            return T::index;
+        }
         std::shared_ptr<animal> make_child() const override {
             std::shared_ptr<animal_crtp> child(new animal_crtp());
             child->gene_ = gene_; // copy gene

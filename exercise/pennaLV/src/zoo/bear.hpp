@@ -11,7 +11,9 @@
 
 #include <string>
 
+#include <sim_typedef.hpp>
 #include "animal_crtp.hpp"
+#include "zoo.hpp"
 
 namespace zoo {
 
@@ -24,10 +26,11 @@ namespace zoo {
         }
         bear(bear const & rhs): super(rhs) {
         }
-        static double interaction();
+        static double interaction(sim::count_array const & N_t);
         
         public:
         static const std::string name;
+        static const tag::zoo_enum index = tag::bear;
     };
     
 }//end namespace zoo

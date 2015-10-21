@@ -7,6 +7,7 @@
  ******************************************************************************/
 #include <zoo/bear.hpp>
 #include <zoo/animal.hpp>
+#include <sim_typedef.hpp>
 #include <util/random.hpp>
 #include <vector>
 
@@ -20,8 +21,6 @@ TEST_CASE("Testing Properties of Bear", "[bearTest]") {
   bear::prop.repr_age = 8;
   bear::prop.threshold = 3;
   bear::prop.mut_rate = 2;
-  bear::prop.N_max = 5;
-  bear::prop.N_init = 5;
   
   SECTION("Test Reproduction age") {
     bear test_bear1(1);
@@ -41,13 +40,13 @@ TEST_CASE("Testing Properties of Bear", "[bearTest]") {
   }
   
   SECTION("Test Max Population") {
-    bear::prop.N_max = 4;
-    bear::prop.N_init = 5;
-    std::vector<bear> test_bear_collection;
-    for(uint ii=0; ii< bear::prop.N_init; ++ii) {
-      test_bear_collection.push_back(bear(0));
+    uint64_t N_max = 4;
+    uint64_t N_init = 5;
+    std::vector<bear> test_sheep_collection;
+    for(uint ii=0; ii < N_init; ++ii) {
+      test_sheep_collection.push_back(bear(0));
     }
-    CHECK(test_bear_collection[0].progress() == false);
+    CHECK(test_sheep_collection[0].progress({0, N_max}, {0, N_max}) == false);
   }
   
   //Create more unit tests. Goal is 100% code coverage!

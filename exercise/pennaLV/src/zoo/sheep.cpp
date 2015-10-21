@@ -6,16 +6,16 @@
  *
  ******************************************************************************/
 
-#include "bear.hpp"
 #include "sheep.hpp"
 
 namespace zoo {
     // const methods
-    double sheep::interaction() {
-        return 1 - 0.1 * bear::prop.N_t / double(sheep::prop.N_t);
+    double sheep::interaction(sim::count_array const & N_t) {
+        return 1 - 0.1 * N_t[tag::bear] / double(N_t[tag::sheep]);
     }
     
     // static members
     const std::string sheep::name = "sheep";
+    
 }//end namespace zoo
 

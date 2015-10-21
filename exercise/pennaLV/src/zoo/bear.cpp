@@ -7,12 +7,11 @@
  ******************************************************************************/
 
 #include "bear.hpp"
-#include "sheep.hpp"
 
 namespace zoo {
     // const methods
-    double bear::interaction() {
-        return sheep::prop.N_t / double(2 * bear::prop.N_t);
+    double bear::interaction(sim::count_array const & N_t) {
+        return N_t[tag::sheep] / double(2 * N_t[tag::bear]);
     }
     
     // static members

@@ -13,10 +13,12 @@
 #include <vector>
 #include <iostream>
 
+#include <sim_typedef.hpp>
+#include "zoo.hpp"
+
 namespace zoo {
     // typedefs (we still call them typedefs even if we dont use typedef)
     using age_type = uint32_t;
-    using count_type = uint64_t;
     using mut_type = uint32_t;
 
     // define this struct only once 
@@ -26,9 +28,6 @@ namespace zoo {
         age_type repr_age;
         mut_type threshold;
         mut_type mut_rate;
-        count_type N_max;
-        count_type N_init;
-        count_type N_t;
     };
 
     class animal {
@@ -45,10 +44,12 @@ namespace zoo {
         animal(animal const & rhs) = default; // for clarity
         
         // modifying methods
-        virtual bool progress() = 0;
+        virtual bool progress(sim::count_array const & N_max
+                            , sim::count_array const & N_t) = 0;
 
         // const methods
         virtual bool adult() const = 0;
+        virtual tag::zoo_enum index() const = 0;
         virtual std::shared_ptr<animal> make_child() const = 0;
         virtual std::string name() const = 0;
         virtual void print(std::ostream & os) const;
