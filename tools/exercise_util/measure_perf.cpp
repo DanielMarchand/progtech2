@@ -41,6 +41,5 @@ int main() {
     
     MIB_SAVE("cycle", "bla.txt")
     
-    
     return 0;
 }

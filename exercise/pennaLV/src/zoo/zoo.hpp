@@ -14,7 +14,7 @@ namespace zoo {
         enum zoo_enum: type {
               sheep
             , bear
-            , N_animal
+            , N_animal 
         };
         
     }//end namespace 

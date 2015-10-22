@@ -25,14 +25,14 @@ namespace sim {
         
         of_ << "#param"
             << " seed " << seed
-            << " N_init " << N_init_[0]
-            << " N_max " << N_max_[0]
+            << " N_init " << N_init_[tag::sheep]
+            << " N_max " << N_max_[tag::sheep]
             << " gene_size " << sheep::prop.gene_size
             << " repr_age " << sheep::prop.repr_age
             << " mut_rate " << sheep::prop.mut_rate
             << " threshold " << sheep::prop.threshold
-            << " N_init_b " << N_init_[1]
-            << " N_max_b " << N_max_[1]
+            << " N_init_b " << N_init_[tag::bear]
+            << " N_max_b " << N_max_[tag::bear]
             << " gene_size_b " << bear::prop.gene_size
             << " repr_age_b " << bear::prop.repr_age
             << " mut_rate_b " << bear::prop.mut_rate
@@ -43,12 +43,12 @@ namespace sim {
         for(uint64_t i = 0; i < N_init_[0]; ++i) {
             pop_.push_back(std::make_shared<sheep>(sheep::random_age()));
         }
-        N_t_[0] += N_init_[0];
+        N_t_[tag::sheep] += N_init_[tag::sheep];
         
         for(uint64_t i = 0; i < N_init_[1]; ++i) {
             pop_.push_back(std::make_shared<bear>(bear::random_age()));
         }
-        N_t_[1] += N_init_[1];
+        N_t_[tag::bear] += N_init_[tag::bear];
     }
 
     // modifying methods
