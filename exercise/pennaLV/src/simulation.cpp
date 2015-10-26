@@ -40,12 +40,12 @@ namespace sim {
             << std::endl;
         
         // generate initial population
-        for(uint64_t i = 0; i < N_init_[0]; ++i) {
+        for(uint64_t i = 0; i < N_init_[tag::sheep]; ++i) {
             pop_.push_back(std::make_shared<sheep>(sheep::random_age()));
         }
         N_t_[tag::sheep] += N_init_[tag::sheep];
         
-        for(uint64_t i = 0; i < N_init_[1]; ++i) {
+        for(uint64_t i = 0; i < N_init_[tag::bear]; ++i) {
             pop_.push_back(std::make_shared<bear>(bear::random_age()));
         }
         N_t_[tag::bear] += N_init_[tag::bear];
@@ -70,15 +70,16 @@ namespace sim {
                     }
                 }
             }
-            of_ << i << " " << N_t_[0] << " " << N_t_[1] << std::endl;
+            of_ << i << " " << N_t_[tag::sheep] << " " << N_t_[tag::bear] << std::endl;
         }
         of_.close();
     }
     // const methods
     void simulation::print() const {
+        using namespace zoo;
         // print population size
-        std::cout << "sheep count " << N_t_[0] << std::endl;
-        std::cout << "bear  count " <<  N_t_[1] << std::endl;
+        std::cout << "sheep count " << N_t_[tag::sheep] << std::endl;
+        std::cout << "bear  count " << N_t_[tag::bear] << std::endl;
         if(pop_.size())
             std::cout << "last " << *pop_.back() << std::endl;
 
