@@ -28,10 +28,9 @@
 
 ## Catch
 In this course we will use [Catch](https://github.com/philsquared/Catch). It is 
-very lightweight and needs only one [header file]
-(https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp).<br />
+very lightweight and needs only one [header file](https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp).<br />
 It's functionality is enough for a small project. For a tutorial, have a look at the <br />
-documentation on Github or consider our [example code] (https://gitlab.phys.ethz.ch/progtech2_hs15/lecture/tree/master/tools/catch): <br />
+documentation on Github or consider our [example code](https://gitlab.phys.ethz.ch/progtech2_hs15/lecture/tree/master/tools/catch): <br />
 It shows you how to write tests and how to link the main function with CMake, <br />
 such that all tests get automatically registered.
 
