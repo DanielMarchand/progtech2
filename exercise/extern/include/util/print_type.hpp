@@ -11,13 +11,14 @@
 #include <type_traits>
 #include <iostream>
 #include <sstream>
+#include <memory>
+#include <map>
 
 inline std::string demangle(std::string const & str) {
     int status;
-    char * demangled = abi::__cxa_demangle(str.c_str(), 0, 0, &status);
-    std::string out = (status==0) ? std::string(demangled) : str;
-    free(demangled);
-    return out;
+    std::unique_ptr<char, void(*)(void*)>
+      dmgl(abi::__cxa_demangle(str.c_str(), 0, 0, &status), std::free);
+    return (status==0) ? dmgl.get() : str;
 }
 
 template<typename T>
@@ -78,15 +79,21 @@ std::string valueness(T &&) {
     return valueness_impl<T>::print();
 }
 
-#define PRINT_TYPE_IMPL(T, name)            \
-std::cout << "the type \033[1;31m" << name  \
-          << "\033[0m is \033[1;32m"        \
-          << type<T>::print() << "\033[0m"; //
+const static std::map<const std::string, const std::string> col = {
+    {"black", "\033[0m"}, {"red", "\033[1;31m"},
+    {"green", "\033[0;32m"}, {"yellow", "\033[0;33m" }
+};
 
-#define PRINT_TYPE_OF(expr)                                                                  \
-std::cout << "the expression \033[1;31m" << #expr                                            \
-          << "\033[0m is an \033[1;33m" << valueness(expr) << "\033[0m with type \033[1;32m" \
-          << type<decltype(expr)>::print() << "\033[0m";                                     //
+#define PRINT_TYPE_IMPL(T, name)                                               \
+std::cout << "the type " << col.at("red") << name                              \
+          << col.at("black") << " is " << col.at("yellow")                     \
+          << type<T>::print() << col.at("black");                             //
+
+#define PRINT_TYPE_OF(expr)                                                    \
+std::cout << "the expression " << col.at("red") << #expr                       \
+          << col.at("black") << " is an " << col.at("yellow") << valueness(expr)\
+          << col.at("black") << " with type "<< col.at("green")                \
+          << type<decltype(expr)>::print() << col.at("black");                //
 
 template<typename T, typename... Args>
 struct type_recursion {

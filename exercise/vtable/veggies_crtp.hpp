@@ -50,7 +50,7 @@ class OneDimVegetable {
 
     // We can call a static method we don't "know" yet exists.
     std::string get_name() {
-        return print_color(color_) + " " + D::get_name();
+        return D::get_name();
     }
 
     void grow(const double & d) {      // default growth per hour
@@ -60,6 +60,13 @@ class OneDimVegetable {
         static_cast<D*>(this)->expire();
         length_ += d;
         weight_ += d * D::linear_density_;
+    }
+
+    inline void print() {
+        std::cout << std::setprecision(3);
+        std::cout << print_color(color_) << " " << D::get_name()
+                  << ":\t\t length " << get_length()
+                  << " cm, weight " << get_weight() << " g"  << std::endl;
     }
 
     inline double get_length() { return length_; }
@@ -111,39 +118,3 @@ class Cucumber : public OneDimVegetable<Cucumber> {
     static constexpr double linear_density_ = 7.5;
     static constexpr uint32_t expiration_time_ = 130_days;
 };
-
-int main() {
-
-    int time = 14_days;  // OneDimVegetables grow by the hour, but we use days
-    Carrot ca;
-    Cucumber cu;
-    auto cap = new Carrot();
-    OneDimVegetable<Carrot> * vp = new Carrot();
-
-    // Growth rates per month curtesy from Wikipedia. They vary.
-    while(time--) {
-        ca.grow(4.9_growth_per_month);
-        cu.grow(100_growth_per_month);
-        cap->grow(5_growth_per_month);
-        vp->grow(5.1_growth_per_month);
-    }
-
-    // age one carrot until it rots
-    time = 100_days;
-    while(time--)
-        vp->grow(5.1_growth_per_month);
-
-    // print all the grown vegetables
-    std::cout << std::setprecision(3);
-    std::cout << ca.get_name() << ":\t\t length " << ca.get_length()
-              << " cm, weight " << ca.get_weight() << " g"  << std::endl;
-    std::cout << cu.get_name() << ":\t\t length " << cu.get_length()
-              << " cm, weight " << cu.get_weight() << " g" << std::endl;
-    std::cout << cap->get_name() << " pointer:\t length " << cap->get_length()
-              << " cm, weight " << cap->get_weight() << " g" << std::endl;
-    std::cout << vp->get_name() << " from base:\t length " << vp->get_length()
-              << " cm, weight " << vp->get_weight() << " g" << std::endl;
-    std::cout << "\nCarrots take three months to grow fully." << std::endl;
-
-    return 0;
-}
