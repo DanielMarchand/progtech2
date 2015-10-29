@@ -9,3 +9,5 @@
 [Exercise 05](pt2_hs15_ex05.pdf)
 
 [Exercise 06](pt2_hs15_ex06.pdf)
+
+[Exercise 07](pt2_hs15_ex07.pdf)

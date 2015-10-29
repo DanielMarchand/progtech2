@@ -40,7 +40,10 @@ TEST_CASE("Functional Test of main", "[mainTest]") {
     N_init[bear::name] = 1000;
     N_max[bear::name] = 1000;
     
-    sim::simulation pennaLV("pennaLV.txt", util::seed<>(), N_max, N_init);
+    sim::simulation<sheep, bear> pennaLV("pennaLV.txt"
+                                        , util::seed<>()
+                                        , N_max
+                                        , N_init);
     
     pennaLV.run(300);
     

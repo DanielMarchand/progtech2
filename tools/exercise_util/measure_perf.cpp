@@ -8,7 +8,7 @@
 
 #include "../../exercise/extern/include/util/profiler.hpp"
 
-int main() {
+int main(int argc, char* argv[]) {
     
     MIB_START("main")
     std::vector<int> vec;
@@ -39,7 +39,12 @@ int main() {
     MIB_PRINT("cycle")
     MIB_PRINT("nsec")
     
-    MIB_SAVE("cycle", "bla.txt")
+    std::string name = "list_vector_comparison.txt";
+    
+    if(argc > 1)
+        name = argv[1];
+    
+    MIB_SAVE("cycle", name)
     
     return 0;
 }

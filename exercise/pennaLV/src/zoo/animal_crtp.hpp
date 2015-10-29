@@ -12,6 +12,7 @@
 #include "zoo.hpp"
 #include "animal.hpp"
 #include <util/random.hpp>
+//~ #include <util/profiler.hpp>
 
 #include <memory>
 
@@ -25,7 +26,9 @@ namespace zoo {
         // can be ommited here since the base has virtual dtor,
         // thus this dtor will be generated virtual
         // virtual ~animal_crtp() {}
-
+        
+        animal_crtp(animal_crtp const & rhs) = default; // for clarity
+        
         // modifying methods
         bool progress(sim::count_array const & N_max
                     , sim::count_array const & N_t) override {
@@ -57,13 +60,16 @@ namespace zoo {
             return T::index;
         }
         std::shared_ptr<animal> make_child() const override {
+            //~ MIB_START("mkchild")
             std::shared_ptr<animal_crtp> child(new animal_crtp());
             child->gene_ = gene_; // copy gene
+            //~ MIB_NEXT("mutate")
 
             for(mut_type i = 0; i < prop.mut_rate; ++i) { // mutate some gene
                 auto pos = gene_rng();
                 child->gene_[pos] = !child->gene_[pos]; // flip random gene
             }
+            //~ MIB_STOP("mutate")
             return child;
         }
 
