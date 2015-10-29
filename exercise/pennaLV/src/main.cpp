@@ -2,6 +2,9 @@
 // Date:    19.10.2015 10:44:57 CEST
 // File:    new_main.cpp
 
+
+//~ #include <util/profiler.hpp>
+
 #include <simulation.hpp>
 #include <zoo/bear.hpp>
 #include <zoo/sheep.hpp>
@@ -34,10 +37,24 @@ int main() {
     N_init[bear::name] = 1000;
     N_max[bear::name] = 1000;
     
-    sim::simulation pennaLV("pennaLV.txt", util::seed<>(), N_max, N_init);
+    //~ MIB_START("main")
+    //~ MIB_START("ctor")
+
+    sim::simulation<sheep, bear> pennaLV("pennaLV.txt"
+                                        , util::seed<>()
+                                        , N_max
+                                        , N_init);
     
+    //~ MIB_NEXT("run")
     pennaLV.run(300);
+    //~ MIB_NEXT("print")
     pennaLV.print();
+    
+    //~ MIB_STOP("print")
+    //~ MIB_STOP("main")
+    
+    //~ MIB_PRINT("cycle")
+    //~ MIB_SAVE("cycle", "pennaLV_cycle.txt")
     
     return 0;
 }
