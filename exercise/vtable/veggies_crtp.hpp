@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * We are looking at v(ege)tables.
+ * Header for CRTP vegetables
  * Requires -std=c++14.
  * 
  * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015

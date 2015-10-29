@@ -1,13 +1,12 @@
 # Testing
 
 ### Why do we need tests?
-* ensure correctness of our code
-* help for debugging
-* tests are often useful code examples of how to use a library
+* ensure ___correctness___ of our code
+* help for ___debugging___
+* tests are often useful code ___examples___ of how to use a library
 
 ### What do we expect from our testing framework?
 
-* easy to use (make test)
 * platform independent
 * easy setup
 * informative (with color)
@@ -15,6 +14,7 @@
 * accept source & build tool
 * integration (only allow to commit if tests work)
 * granularity (small low level test and system-wide tests)
+* easy to use (make test)
 * fast
 * statistics (test-coverage, how many parts of the code are tested)
 * check-correctness of:
