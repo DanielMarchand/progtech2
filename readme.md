@@ -3,7 +3,7 @@
 * Slides Week 07 will be handed out
 * [Style discussion](wiki/style.md)
 * [Concept v(ege)tables](exercise/vtable/main.cpp)
-* [Microbenchmark Plotter](tools/exercise_extern_tools/measure_perf_demo.cpp)
+* [Microbenchmark Plotter](tools/exercise_extern_tools/measure_perf_demo.cpp) (see the Exercise Sheet for explanation)
 * [PennaLV Code](exercise/pennaLV)
 
 ## Content
