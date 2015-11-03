@@ -147,9 +147,11 @@ std::string fct_sig() {
     if(!symbols) return "Error: No symbols";
 
     std::string mangled = detail::mangled_part(std::string(symbols[1]));
+    free(symbols);
     if(mangled == "")
         std::cerr << "Error: No dynamic symbol (you probably didn't compile with -rdynamic)"
                   << std::endl;
+
     int status = 0;
     std::string demangled = demangle(mangled, status);
     switch (status) {
@@ -166,7 +168,6 @@ std::string fct_sig() {
         return demangled;
     }
 
-    free(symbols);
     return "";
 }
 
