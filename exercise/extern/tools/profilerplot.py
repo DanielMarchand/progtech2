@@ -5,15 +5,6 @@
 # Date:    27.10.2015 15:15:58 CET
 # File:    profilerplot.py
 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# 
-# Author:  Mario S. Könz <mskoenz@gmx.net>
-# Date:    14.09.2015 11:20:31 CEST
-# File:    pennaplot.py
-
-import matplotlib.pyplot as plt
-
 import re
 import os
 import sys

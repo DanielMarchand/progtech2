@@ -1,9 +1,9 @@
-## New 22.10.2015
-* [Exercise Sheet Week 06](task_sheets/pt2_hs15_ex06.pdf)
-* [Slides Week 06](slides/pt2_hs15_week06.pdf)
-* [util Profiler/Type Printer Examples](tools/exercise_util)
-* [Static Keyword](exercise/in_depth/linkage_of_static)
-* [Forward Challenge](challenge/w06_forward)
+## New 29.10.2015
+* [Exercise Sheet Week 07](task_sheets/pt2_hs15_ex07.pdf)
+* Slides Week 07 will be handed out
+* [Style discussion](wiki/style.md)
+* [Concept v(ege)tables](exercise/vtable/main.cpp)
+* [Microbenchmark Plotter](tools/exercise_extern_tools/measure_perf_demo.cpp)
 * [PennaLV Code](exercise/pennaLV)
 
 ## Content
