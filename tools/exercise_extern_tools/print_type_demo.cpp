@@ -8,6 +8,7 @@
 
 template<typename T>
 void fct(T && t) {
+    std::cout << fct_sig() << std::endl;
     PRINT_TYPE(T)
     PRINT_TYPE_OF(t)
 }
