@@ -11,7 +11,7 @@ namespace zoo {
     namespace tag {
         using type = uint8_t;
         
-        enum zoo_enum: type {
+        enum animal_enum: type {
               sheep
             , bear
             , N_animal

@@ -10,28 +10,42 @@
 #define ANIMAL_CRTP_HEADER
 
 #include "zoo.hpp"
-#include "animal.hpp"
+#include <sim_typedef.hpp>
 #include <util/random.hpp>
-//~ #include <util/profiler.hpp>
 
 #include <memory>
+#include <iostream>
 
 namespace zoo {
+
+    // typedefs (we still call them typedefs even if we dont use typedef)
+    using age_type = uint32_t;
+    using mut_type = uint32_t;
+
+    // define this struct only once 
+    struct species_properties {
+        age_type gene_size; // not optimal, but max_age and gene_size are connected
+        age_type repr_age;
+        mut_type threshold;
+        mut_type mut_rate;
+    };
+
     template<typename T>
-    class animal_crtp: public animal {
-        using super = animal;
+    class animal_crtp {
         public:
         // structors
-        animal_crtp(age_type const & age = 0): super(age, prop.gene_size) {}
-        // can be ommited here since the base has virtual dtor,
-        // thus this dtor will be generated virtual
-        // virtual ~animal_crtp() {}
-        
+        animal_crtp(age_type const & age = 0,
+                    age_type const & gene_size = prop.gene_size):
+                      age_(age)
+                    , bad_genes_(0)
+                    , gene_(gene_size) {}
+        virtual ~animal_crtp() {} // virtual here is important!
+
         animal_crtp(animal_crtp const & rhs) = default; // for clarity
-        
+
         // modifying methods
         bool progress(sim::count_array const & N_max
-                    , sim::count_array const & N_t) override {
+                    , sim::count_array const & N_t) {
             bad_genes_ += gene_[age_];
             age_ += 1;
 
@@ -53,28 +67,46 @@ namespace zoo {
         }
 
         // const methods
-        inline bool adult() const override {
+        inline bool adult() const {
             return age_ >= prop.repr_age;
         }
-        inline tag::zoo_enum index() const override {
+        inline tag::animal_enum index() const {
             return T::index;
         }
-        std::shared_ptr<animal> make_child() const override {
-            //~ MIB_START("mkchild")
-            std::shared_ptr<animal_crtp> child(new animal_crtp());
-            child->gene_ = gene_; // copy gene
-            //~ MIB_NEXT("mutate")
+        T make_child() const {
+            T child;
+            child.gene_ = gene_; // copy gene
 
             for(mut_type i = 0; i < prop.mut_rate; ++i) { // mutate some gene
                 auto pos = gene_rng();
-                child->gene_[pos] = !child->gene_[pos]; // flip random gene
+                child.gene_[pos] = !child.gene_[pos]; // flip random gene
             }
-            //~ MIB_STOP("mutate")
-            return child;
+            return std::move(child);
         }
 
-        inline std::string name() const override {
+        inline std::string name() const {
             return T::name;
+        }
+
+        void print(std::ostream & os) const {
+            os << name() << ": (age: " << age_ << "): ";
+            for(age_type i = 0; i < gene_.size(); ++i) {
+                os << "\033[0;";
+                if(i < age_) { // these blocks just generate colors
+                    if(gene_[i])
+                        os << "41m";
+                    else
+                        os << "42m";
+                }
+                else {
+                    if(gene_[i])
+                        os << "31m";
+                    else
+                        os << "32m";
+                }
+                // actual print
+                os << gene_[i] << "\033[0m";
+            }
         }
 
         // static methods
@@ -93,6 +125,13 @@ namespace zoo {
         private:
         static util::rng_class<age_type> gene_rng;
         static util::rng_class<double> prob_rng;
+
+        // members
+        protected: // derived class need access
+        age_type age_;
+        mut_type bad_genes_;
+        std::vector<bool> gene_;
+
     };
 
     // static members
@@ -105,6 +144,13 @@ namespace zoo {
 
     template<typename T>
     util::rng_class<double> animal_crtp<T>::prob_rng(0, 1);
+
+    // printing
+    template<typename D>
+    std::ostream & operator<<(std::ostream & os, animal_crtp<D> const & arg) {
+        arg.print(os);
+        return os;
+    }
 
 }//end namespace zoo
 

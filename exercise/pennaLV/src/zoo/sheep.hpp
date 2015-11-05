@@ -30,7 +30,7 @@ namespace zoo {
         
         public:
         static const std::string name;
-        static const tag::zoo_enum index = tag::sheep;
+        static const tag::animal_enum index = tag::sheep;
     };
     
 }//end namespace zoo

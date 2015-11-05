@@ -6,7 +6,7 @@
  *
  ******************************************************************************/
 #include <zoo/sheep.hpp>
-#include <zoo/animal.hpp>
+#include <zoo/animal_crtp.hpp>
 #include <sim_typedef.hpp>
 #include <util/random.hpp>
 #include <vector>

@@ -9,7 +9,7 @@
 #ifndef SIMULATION_HEADER
 #define SIMULATION_HEADER
 
-#include <zoo/animal.hpp>
+#include <animal_concept.hpp>
 #include <sim_typedef.hpp>
 
 //~ #include <util/profiler.hpp>
@@ -17,6 +17,7 @@
 #include <map>
 #include <list>
 #include <fstream>
+#include <iostream>
 
 namespace sim {
     template<typename A1, typename A2>
@@ -52,19 +53,19 @@ namespace sim {
                     auto & ap = (*it);
                     
                     //~ MIB_START("prog")
-                    auto dead = not ap->progress(N_max_, N_t_);
+                    auto dead = not ap.progress(N_max_, N_t_);
                     //~ MIB_STOP("prog")
                     if(dead) {
                         //~ MIB_START("dead")
-                        --N_t_[ap->index()];
+                        --N_t_[ap.index()];
                         it = pop_.erase(it);
                         --it;
                         //~ MIB_STOP("dead")
                     } else {
-                        if(ap->adult()) {
+                        if(ap.adult()) {
                             //~ MIB_START("birth")
-                            ++N_t_[ap->index()];
-                            pop_.push_front(ap->make_child());
+                            ++N_t_[ap.index()];
+                            pop_.push_front(ap.make_child());
                             //~ MIB_STOP("birth")
                         }
                     }
@@ -84,7 +85,7 @@ namespace sim {
             std::cout << A1::name << " count " << N_t_[A1::index] << std::endl;
             std::cout << A2::name << " count " << N_t_[A2::index] << std::endl;
             if(pop_.size())
-                std::cout << "last " << *pop_.back() << std::endl;
+                std::cout << "last " << pop_.back() << std::endl;
         }
     private:
         // helper functions that only take type AX
@@ -101,14 +102,14 @@ namespace sim {
         template<typename AX>
         void init_helper() {
             for(uint64_t i = 0; i < N_init_[AX::index]; ++i) {
-                pop_.push_back(std::make_shared<AX>(AX::random_age()));
+                pop_.emplace_back(AX(AX::random_age()));
             }
             N_t_[AX::index] += N_init_[AX::index];
         }
-    
+
     private:
         std::ofstream of_;
-        std::list<std::shared_ptr<zoo::animal>> pop_;
+        std::list<animal_concept> pop_;
         count_array N_max_;
         count_array N_init_;
         count_array N_t_;
