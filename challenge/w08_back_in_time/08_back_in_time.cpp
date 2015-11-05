@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-// c++14 version
+// C++14 version, replace this
 constexpr int calc_lpb(int const & N) {
     int candidate = N - 1; // N excluded
     bool prime = true;
@@ -12,7 +12,7 @@ constexpr int calc_lpb(int const & N) {
     for(; candidate > 1; --candidate) {
         prime = true;
         // going to sqrt(candidate) would be enough...
-        // ... but have fun impl compiletime sqrt under c++98/03 :P
+        // ... but have fun implementing compiletime sqrt under c++98/03 :P
         for(int i = 2; i < candidate; ++i) {
             if(candidate % i == 0) {
                 prime = false;
@@ -24,20 +24,21 @@ constexpr int calc_lpb(int const & N) {
     }
 }
 
-// c++14 version
+// C++14 version, replace this
 template<int N>
 struct largest_prime_below {
     static constexpr int value = calc_lpb(N);
 };
 
+
 int main() {
     // don't modify the main
     
-    const int N = 100;
+    const int N = 100;  // this could be arbitrary
     
-    // since there is no constexpr in c++98/03 this emulates this
+    // since there is no constexpr in c++98/03, we emulate it with array size
     int a[largest_prime_below<N>::value];
-    (void)a; // so we dont get the unused variable warning
+    (void)a; // omit the "unused variable" warning
     
     std::cout << largest_prime_below<N>::value << std::endl;
     
