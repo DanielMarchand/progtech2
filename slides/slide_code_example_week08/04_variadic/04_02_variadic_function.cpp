@@ -33,6 +33,7 @@ double accumulate(T const & val, Args const &... args) {
 // Args and args is convention, could be any name
 template<typename... Args>
 double mean(Args const &... args) {
+    //~ P_SIG()
     // sizeof...(args) or sizeof...(Args) returns how many 
     // argument are found in the argument-pack
     //~ PNW_BLUE(sizeof...(args))

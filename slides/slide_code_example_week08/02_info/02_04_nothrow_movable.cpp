@@ -47,6 +47,9 @@ struct container {
 //  +---------------------------------------------------+
 int main() {
     
+    PNW_BOOL(std::is_move_constructible<container>::value);
+    PNW_BOOL(std::is_copy_constructible<container>::value);
+    
     PNW_BOOL(is_nothrow_move_constructible<foo>::value);
     
     PNW_BOOL(is_nothrow_move_constructible<bar>::value);
