@@ -29,8 +29,8 @@ struct is_nothrow_move_constructible {
 
 //=================== some types ===================
 struct foo {
-    //~ foo(foo &&) {} // implicitly deletes the copy-ctor
-    foo(foo &&) noexcept {}
+    foo(foo &&) {} // implicitly deletes the copy-ctor
+    //~ foo(foo &&) noexcept {}
     
 };
 struct bar {
@@ -39,7 +39,7 @@ struct bar {
 };
 struct container {
     //~ foo f;
-    bar b;
+    //~ bar b;
 };
 
 //  +---------------------------------------------------+

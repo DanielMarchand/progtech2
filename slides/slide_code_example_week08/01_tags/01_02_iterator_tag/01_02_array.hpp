@@ -5,7 +5,7 @@
 #ifndef _01_02_ARRAY_HEADER
 #define _01_02_ARRAY_HEADER
 
-#include "02_02_bidir_iterator.hpp"
+#include "01_02_bidir_iterator.hpp"
 
 //=================== array ===================
 template <class T, uint64_t N> 

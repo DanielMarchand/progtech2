@@ -6,7 +6,7 @@
 //=================== include ===================
 #include <iostream>
 #include <iterator>
-#include "02_02_array.hpp"
+#include "01_02_array.hpp"
 #include "../../presentation.hpp"
 
 //=================== main ===================

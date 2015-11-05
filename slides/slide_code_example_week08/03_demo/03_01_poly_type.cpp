@@ -152,21 +152,21 @@ int main() {
     x = 3.14;
     y = "some_text";
     
-    PN_RED(y)
+    PNW_RED(y)
     PN_BLUE(x)
     
     // assign to numbers
     double number = x;
     std::string string(y);
     
-    PN_YELLOW(number)
+    PNW_YELLOW(number)
     PN_YELLOW(string)
     
     // change poly_type
     x = "changed_to_string";
     y = 42;
     
-    PN_BLUE(y)
+    PNW_BLUE(y)
     PN_RED(x)
     
     // poly_type throws an exception if it cannot be converted

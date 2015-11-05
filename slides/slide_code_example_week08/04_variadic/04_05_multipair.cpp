@@ -91,8 +91,8 @@ int main() {
     third_pair<int, int, int> p3(1, 2, 3);
     
     P_BLUE(TYPE_OF(p1))
-    P_BLUE(TYPE_OF(p2))
-    P_BLUE(TYPE_OF(p3))
+    PW_BLUE(TYPE_OF(p2))
+    PW_BLUE(TYPE_OF(p3))
     
     return 0;
 }

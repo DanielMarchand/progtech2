@@ -16,7 +16,7 @@ double mean(int const & N, ...) {
     
     for(int i = 0; i < N; ++i) {
         double val = va_arg(ap, double); // hope and pray it's a double
-        PNW_MAGENTA(val)
+        //~ PNW_MAGENTA(val)
         sum += val;
     }
     

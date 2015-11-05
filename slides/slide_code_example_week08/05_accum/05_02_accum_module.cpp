@@ -102,7 +102,7 @@ int main() {
     CNW_NORMAL(acc << 1 << 3 << 5 << 0 << 2)
     
     CW_NORMAL(
-    PNW_GREEN(acc.count())
+    PN_GREEN(acc.count())
     PNW_YELLOW(acc.mean())
     PNW_RED(acc.min())
     )

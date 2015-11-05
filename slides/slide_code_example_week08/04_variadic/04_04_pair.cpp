@@ -30,6 +30,12 @@ using rm_ref = std::remove_reference_t<T>;
 // T1 is int& and thus we need rm_ref...
 template<typename T1, typename T2>
 pair<rm_ref<T1>, rm_ref<T2>> make_pair(T1 && t1, T2 && t2) {
+    //~ CW_NORMAL(
+    //~ PN_BLUE(TYPE(T1))
+    //~ PN_BLUE(TYPE(rm_ref<T1>))
+    //~ PNW_BLUE(TYPE(T2))
+    //~ PN_BLUE(TYPE(rm_ref<T2>))
+    //~ )
     return pair< rm_ref<T1>, rm_ref<T2> >( std::forward<T1>(t1)
                                          , std::forward<T2>(t2));
 }
@@ -53,7 +59,7 @@ int main() {
     auto p1 =      make_pair(i, std::move(f));
     auto p2 = std::make_pair(i, foo());
     
-    P_BLUE(TYPE_OF(p1))
+    PW_BLUE(TYPE_OF(p1))
     P_BLUE(TYPE_OF(p2))
     
     return 0;

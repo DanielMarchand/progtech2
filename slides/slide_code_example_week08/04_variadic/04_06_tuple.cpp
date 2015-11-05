@@ -92,7 +92,8 @@ void fct() {
 //=================== main ===================
 int main() {
     
-    fct();
+    //~ fct();
+    //~ return 0;
     
     // since auto all "generator" functions are more convenient
     int i = 10;
