@@ -1,0 +1,9 @@
+parent name cycle_mean cycle_std calls
+run birth 7873.4 16.2928 9745
+main ctor 7.22365e+06 0 1
+run dead 377.414 0.707048 11580
+sentinel_root main 1.77808e+08 0 1
+run of 2.5648e+06 0 1
+main print 117063 0 1
+run prog 1470.74 7.15348 56149
+main run 1.70467e+08 0 1
