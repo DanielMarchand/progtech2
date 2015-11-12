@@ -18,3 +18,4 @@ Software is more often licensed than sold. We want to know about the regulations
 * should be well ___understood___ by people in the craft (not obscure)
 * handle ___software patents___ (or be conciously silent on them)
 * state ___coverage___ on other (non source-code) project parts like documentation, logos, data, ...
+* desired level of virality / propagation
