@@ -14,3 +14,4 @@ Slides Week 07 will be handed out
 
 [Slides Week 08](pt2_hs15_week08.pdf)
 
+Slides Week 09 will be handed out
