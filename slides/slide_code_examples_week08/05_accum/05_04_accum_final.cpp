@@ -4,13 +4,11 @@
 
 //=================== include ===================
 #include "../presentation.hpp"
-// header not provided bc parts are an exercise
 #include "accumulator/accum.hpp"
 
 //=================== main ===================
 int main() {
     
-    // headers not provided bc parts are an exercise
     using acc_type = accum<int, tag::count
                               , tag::error
                               , tag::ema<4>
