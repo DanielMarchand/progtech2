@@ -29,11 +29,11 @@ public:
         --ptr_;
         return (*this);
     }
-    //~ pt2_iterator & operator+=(int const & dist) {
-        //~ PW_YELLOW("it += " + std::to_string(dist));
-        //~ ptr_ += dist;
-        //~ return (*this);
-    //~ }
+    pt2_iterator & operator+=(int const & dist) {
+        PW_YELLOW("it += " + std::to_string(dist));
+        ptr_ += dist;
+        return (*this);
+    }
     
     // const methods
     value_type & operator*  () const { return *ptr_; }
@@ -49,8 +49,8 @@ namespace std {
     template<typename T>
     struct iterator_traits<pt2_iterator<T>> {
         using difference_type = int64_t;
-        //~ using iterator_category = std::random_access_iterator_tag;
-        using iterator_category = std::bidirectional_iterator_tag;
+        using iterator_category = std::random_access_iterator_tag;
+        //~ using iterator_category = std::bidirectional_iterator_tag;
     };
     
     
