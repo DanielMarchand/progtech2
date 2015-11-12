@@ -40,8 +40,26 @@ TEST_CASE("Functional Test of main", "[mainTest]") {
     N_init[bear::name] = 1000;
     N_max[bear::name] = 1000;
     
-    sim::simulation<sheep, bear> pennaLV("pennaLV.txt"
-                                        , util::seed<>()
+    std::map<std::string, std::string> param;
+    
+    param["seed"] = std::to_string(util::seed<>());
+    
+    param["N_init_sheep"] = std::to_string(N_init[sheep::name]);
+    param["N_max_sheep"] = std::to_string(N_max[sheep::name]);
+    param["gene_size_sheep"] = std::to_string(sheep::prop.gene_size);
+    param["repr_age_sheep"] = std::to_string(sheep::prop.repr_age);
+    param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
+    param["threshold"] = std::to_string(sheep::prop.threshold);
+    
+    param["N_init_sheep"] = std::to_string(N_init[sheep::name]);
+    param["N_max_sheep"] = std::to_string(N_max[sheep::name]);
+    param["gene_size_sheep"] = std::to_string(sheep::prop.gene_size);
+    param["repr_age_sheep"] = std::to_string(sheep::prop.repr_age);
+    param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
+    param["threshold"] = std::to_string(sheep::prop.threshold);
+    
+    sim::simulation<bear, sheep> pennaLV("pennaLV.txt"
+                                        , param
                                         , N_max
                                         , N_init);
     

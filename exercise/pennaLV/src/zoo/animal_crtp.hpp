@@ -10,7 +10,6 @@
 #define ANIMAL_CRTP_HEADER
 
 #include "zoo.hpp"
-#include <sim_typedef.hpp>
 #include <util/random.hpp>
 
 #include <memory>
@@ -33,6 +32,9 @@ namespace zoo {
     template<typename T>
     class animal_crtp {
         public:
+        
+        using count_array = std::array<uint64_t, zoo::tag::N_animal>;
+        
         // structors
         animal_crtp(age_type const & age = 0,
                     age_type const & gene_size = prop.gene_size):
@@ -41,11 +43,12 @@ namespace zoo {
                     , gene_(gene_size) {}
         virtual ~animal_crtp() {} // virtual here is important!
 
-        animal_crtp(animal_crtp const & rhs) = default; // for clarity
+        // copy ctor implicitly deleted by move, enable if needed
+        animal_crtp(animal_crtp && rhs) noexcept = default; // for clarity
 
         // modifying methods
-        bool progress(sim::count_array const & N_max
-                    , sim::count_array const & N_t) {
+        bool progress(count_array const & N_max
+                    , count_array const & N_t) {
             bad_genes_ += gene_[age_];
             age_ += 1;
 
@@ -122,6 +125,7 @@ namespace zoo {
         // static members
         public:
         static species_properties prop;
+        static const tag::animal_enum N_animal = tag::N_animal;
         private:
         static util::rng_class<age_type> gene_rng;
         static util::rng_class<double> prob_rng;

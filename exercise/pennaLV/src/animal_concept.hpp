@@ -45,7 +45,6 @@ static const tag::animal_enum index;
 #ifndef ANIMALCONCEPT_HEADER
 #define ANIMALCONCEPT_HEADER
 
-#include "zoo/zoo.hpp"
 #include <sim_typedef.hpp>
 
 #include <memory>
@@ -54,8 +53,10 @@ static const tag::animal_enum index;
 
 namespace sim {
 
+template<typename CA>
 class animal_concept;
 
+template<typename CA>
 class animal_concept_base {  // polymorphic base class
 
     public:
@@ -63,11 +64,12 @@ class animal_concept_base {  // polymorphic base class
     virtual ~animal_concept_base() {}
 
 
-    virtual bool progress(sim::count_array const &, sim::count_array const &) = 0;
+    virtual bool progress( CA const & N_max
+                         , CA const & N_t) = 0;
     virtual bool adult() const = 0;
-    virtual animal_concept make_child() = 0;
+    virtual animal_concept<CA> make_child() = 0;
     virtual std::ostream & print(std::ostream &) const = 0;
-    virtual zoo::tag::animal_enum index() const = 0;
+    virtual count_type index() const = 0;
 
     // using age_type = uint32_t;
     // using mut_type = uint32_t;
@@ -80,18 +82,21 @@ class animal_concept_base {  // polymorphic base class
 
 };
 
-template <typename T>
+template <typename T, typename CA>
 class animal_concept_impl;
 
+template<typename CA>
 class animal_concept {  // wrapper class
 
     public:
+    animal_concept(animal_concept const &) = delete;
+    animal_concept(animal_concept &&) = default;
+    template <typename T, typename DUMMY = std::enable_if_t<!std::is_same<T, animal_concept<CA>>::value, int>>
+    animal_concept(T && t):
+        p(new animal_concept_impl<std::remove_reference_t<T>, CA>(std::forward<T>(t))) {}
 
-    template <typename T, typename DUMMY = std::enable_if_t<!std::is_same<T, animal_concept>::value, int>>
-    animal_concept(T && t = T()):
-        p(new animal_concept_impl<std::remove_reference_t<T>>(std::forward<T>(t))) {}
-
-    inline bool progress(sim::count_array const & N_max, sim::count_array const & N_t) {
+    inline bool progress( CA const & N_max
+                        , CA const & N_t) {
         return p->progress(N_max, N_t);
     }
     inline bool adult() const { return p->adult(); }
@@ -99,33 +104,34 @@ class animal_concept {  // wrapper class
     inline std::ostream & print(std::ostream & os) const {
         return (*p).print(os);
     }
-    inline zoo::tag::animal_enum index() const { return p->index(); }
+    inline count_type index() const { return p->index(); }
 
     private:
 
-    std::shared_ptr<animal_concept_base> p;
+    std::unique_ptr<animal_concept_base<CA>> p;
 
 };
 
-template <typename T>
-class animal_concept_impl : public animal_concept_base {  // concept holder class
+template <typename T, typename CA>
+class animal_concept_impl : public animal_concept_base<CA> {  // concept holder class
 
     public:
 
     animal_concept_impl(T && t) : t_(std::move(t)) {}
     
 
-    inline bool progress(sim::count_array const & N_max, sim::count_array const & N_t) override {
+    inline bool progress( CA const & N_max
+                        , CA const & N_t) override {
         return t_.progress(N_max, N_t);
     }
     inline bool adult() const override { return t_.adult(); }
-    inline animal_concept make_child() override {
-        return animal_concept(std::move(t_.make_child()));
+    inline animal_concept<CA> make_child() override {
+        return animal_concept<CA>(std::move(t_.make_child()));
     }
     inline std::ostream & print(std::ostream & os) const override {
         return os << t_;
     }
-    inline zoo::tag::animal_enum index() const override { return T::index; }
+    inline count_type index() const override { return T::index; }
 
     private:
 
@@ -135,7 +141,8 @@ class animal_concept_impl : public animal_concept_base {  // concept holder clas
 
 // We don't outsource the above classes with template methods => this would be
 // the only function in the cpp, so let's be reasonable here and skip the cpp.
-std::ostream & operator<<(std::ostream & os, animal_concept const & arg) {
+template<typename CA>
+std::ostream & operator<<(std::ostream & os, animal_concept<CA> const & arg) {
     return arg.print(os);
 }
 

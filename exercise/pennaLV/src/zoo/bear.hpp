@@ -11,7 +11,6 @@
 
 #include <string>
 
-#include <sim_typedef.hpp>
 #include "animal_crtp.hpp"
 #include "zoo.hpp"
 
@@ -24,9 +23,7 @@ namespace zoo {
         // structors & assignment
         bear(age_type const & age = 0): super(age) {
         }
-        bear(bear const & rhs): super(rhs) {
-        }
-        static double interaction(sim::count_array const & N_t);
+        static double interaction(count_array const & N_t);
         
         public:
         static const std::string name;
