@@ -26,5 +26,6 @@ struct field_type {
     int player;
 };
 
+const int no_player = -1;
 
 #endif //GLOBAL_HEADER

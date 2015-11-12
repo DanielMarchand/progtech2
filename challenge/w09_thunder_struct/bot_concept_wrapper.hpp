@@ -40,6 +40,7 @@ struct bot_wrap_der: public bot_wrap_base {
 };
 
 struct bot_wrap {
+    bot_wrap(): ptr() {}
     template<typename T>
     bot_wrap(T const & t): ptr(new bot_wrap_der<T>(t)) {}
     dir::type move(int const & size
