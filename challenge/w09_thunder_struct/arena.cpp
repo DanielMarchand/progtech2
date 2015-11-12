@@ -26,7 +26,7 @@ int main() {
     // 0 = only show statistics
     // 1 = show statistics after each game (fast)
     // 2 = show step by step game moves
-    int v = 1;
+    int v = 2;
     
     int games = 10000;
     // we will test your thunder_struct on different board sizes (up to 100)
