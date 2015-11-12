@@ -7,6 +7,7 @@
  ******************************************************************************/
 
 #include <iostream>
+
 #include "board.hpp"
 #include "thunder_struct.hpp"
 
@@ -40,11 +41,12 @@ int main() {
         // engine used in this game
         std::mt19937 eng(rng_seed());
         
-        b.setup(size, max_turns);
+        b.setup(size, max_turns, eng);
         
         while(not b.winner())
             b.turn(eng);
         
+        b.sort_alphabetical();
         b.print_report(i+1);
     }
     
