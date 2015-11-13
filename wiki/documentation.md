@@ -33,9 +33,9 @@
 ### Doxygen
 
 In this course we will use [Doxygen](http://www.stack.nl/~dimitri/doxygen/).<br />
-Check out the [CRTP-V(ege)table](exrecise/vtable/doc) example (just execute `doxygen` in this
+Check out the [CRTP-V(ege)table](exercise/vtable/doc) example (just execute `doxygen` in this
 directory and look at `html/index.html`) for a quick demo.
-Doxygen has a [comprehensive documentation](https://www.stack.nl/~dimitri/doxygen/manual/markdown.html)
+Doxygen has a [comprehensive documentation](https://www.stack.nl/~dimitri/doxygen/manual/)
 and a useful [commands overview](https://www.stack.nl/~dimitri/doxygen/manual/commands.html),
 as well as [Markdown](https://daringfireball.net/projects/markdown/) support.
 
