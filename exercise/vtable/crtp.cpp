@@ -14,7 +14,8 @@
 /**
  * 
  * \mainpage
- * CRTP demo with one-dimensional vegetables: Carrot and Cucumber
+ * CRTP demo with one-dimensional vegetables: Carrot and Cucumber<br />
+ * This only documents the crtp.cpp file.
  * 
  * \copydetails crtp.cpp
  *
@@ -164,7 +165,6 @@ class Cucumber : public OneDimVegetable<Cucumber> {
     static constexpr uint32_t expiration_time_ = 130_days;
 };
 
-// mmm
 /// main function
 int main() {
 
