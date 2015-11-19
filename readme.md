@@ -3,6 +3,8 @@
 * [Exercise Sheet Week 10](task_sheets/pt2_hs15_ex10.pdf)
 * [PennaLV Code Solution](exercise/pennaLV)
 * [Licensing Update](wiki/licensing.md)
+* [Documentation Update](wiki/documentation.md)
+* [Serialisation Update](wiki/serialization.md)
 * [Challenge Solution ](challenge/w09_thunder_struct)
 
 ## Content

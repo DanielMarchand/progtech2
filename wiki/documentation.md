@@ -86,6 +86,25 @@ After this, your build correctly supports `make doc`, which will generate a `htm
 directory in the `doc` of your project root (open `path_to_your_project/doc/html/index.html`
 in a web browser). The `doc` in your build directory is only a temporary.
 
+
+#### Read the Docs style
+
+If you prefer the documentation style shown in the lecture (“Read the Docs” style),
+you can apply it with the following modifications of the Doxyfile (or Doxyfile.in):
+
+    HTML_HEADER            = @DOC_DIR@/include/header.html
+    HTML_FOOTER            = @DOC_DIR@/include/footer.html
+    HTML_EXTRA_STYLESHEET  = @DOC_DIR@/include/doxygen-extra.css
+    DISABLE_INDEX          = YES
+    GENERATE_TREEVIEW      = YES
+
+The required `include/*` files can be copied from `lecture/exercise/pennaLV/doc/`
+
+DOC_DIR has to be set in your `doc/CMakeLists.txt`:
+
+    set(DOC_DIR ${PROJECT_SOURCE_DIR}/doc)  # needed in Doxyfile.in
+
+
 ### Other documentation frameworks
 
 **[Doc++](http://docpp.sourceforge.net/)**: generates documentation for C, C++, IDL and Java<br />
