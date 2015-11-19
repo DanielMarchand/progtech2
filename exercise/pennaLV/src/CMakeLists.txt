@@ -1,3 +1,6 @@
+# ================ include dirs
+include_directories(sim)
+
 # ================ sub dirs
 add_subdirectory(zoo)
 

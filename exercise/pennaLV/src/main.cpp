@@ -10,9 +10,7 @@
  * 
  ******************************************************************************/
 
-//~ #include <util/profiler.hpp>
-
-#include <simulation.hpp>
+#include <sim/simulation.hpp>
 #include <zoo/bear.hpp>
 #include <zoo/sheep.hpp>
 #include <zoo/adapter.hpp>

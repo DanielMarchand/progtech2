@@ -12,7 +12,7 @@
 #include <zoo/bear.hpp>
 #include <zoo/sheep.hpp>
 #include <zoo/adapter.hpp>
-#include <simulation.hpp>
+#include <sim/simulation.hpp>
 #include <util/random.hpp>
 
 #include <map>
