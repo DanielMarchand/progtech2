@@ -1,13 +1,9 @@
 ## New 12.11.2015
-* Slides Week 09 will be handed out
-* [Exercise Sheet Week 09](task_sheets/pt2_hs15_ex09.pdf)
-* [Meta List Code Solution](exercise/mtp/meta_list_sol.cpp)
+* [Slides Week 10](slides/pt2_hs15_week10)
+* [Exercise Sheet Week 10](task_sheets/pt2_hs15_ex10.pdf)
 * [PennaLV Code Solution](exercise/pennaLV)
-* [Licensing discussion](wiki/licensing.md)
-* [Doxygen Wiki Entry](wiki/documentation.md)
-* [Doxygen Example](exercise/vtable/doc)
-* [Challenge Solution](challenge/w08_back_in_time) or [more generic](slides/slide_code_examples_week08/03_demo/03_03_compile_time_prime.cpp)
-* [Thunder-struct Challenge](challenge/w09_thunder_struct)
+* [Licensing Update](wiki/licensing.md)
+* [Challenge Solution ](challenge/w09_thunder_struct)
 
 ## Content
 

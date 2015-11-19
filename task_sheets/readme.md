@@ -15,3 +15,5 @@
 [Exercise 08](pt2_hs15_ex08.pdf)
 
 [Exercise 09](pt2_hs15_ex09.pdf)
+
+[Exercise 10](pt2_hs15_ex10.pdf)

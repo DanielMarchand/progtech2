@@ -15,3 +15,9 @@ Slides Week 07 will be handed out
 [Slides Week 08](pt2_hs15_week08.pdf)
 
 Slides Week 09 will be handed out
+
+[Slides Week 10 Licence](pt2_hs15_week10/pt2_hs15_week10_licensing.pdf)
+
+[Slides Week 10 boost::serialize](pt2_hs15_week10/pt2_hs15_week10_serialize.pdf)
+
+[Slides Week 10 boost::mpi](pt2_hs15_week10/pt2_hs15_week10_mpi.pdf)
