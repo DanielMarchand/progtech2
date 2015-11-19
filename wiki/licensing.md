@@ -22,7 +22,7 @@ Software is more often licensed than sold. We want to know about the regulations
 
 ## Licensing lecture
 
-The licensing [lecture slides](slides/pt2_hs15_week10_licensing.pdf) expand upon the above discussion.<br />
+The licensing [lecture slides](slides/pt2_hs15_week10/pt2_hs15_week10_licensing.pdf) expand upon the above discussion.<br />
 They also contain two links to FOSS license picker helpers:
 
 http://choosealicense.com/licenses/<br />
