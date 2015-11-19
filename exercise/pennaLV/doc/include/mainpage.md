@@ -14,7 +14,7 @@ and further introduce multiple species and interactions between them
 
 This framework contains two libraries:
 * a collection of animals (\ref zoo)
-* a simulation frame to simulate an collection of animals and their interaction (\ref sim)
+* a framework to simulate a collection of animals and their interaction (\ref sim)
 
 Simulating PennaLV with only one animal species (i.e. sheep), we see that the mutation rate
 influences the stable population count. The following plot shows the 
