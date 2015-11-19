@@ -42,6 +42,7 @@ struct bot_data {
     bool alive;
     double win;
     double draw;
+    int kills;
     std::string color;
 };
 
@@ -60,11 +61,13 @@ public:
                         , verbose_(v) {
         
         std::vector<std::string> color;
-        color.push_back("\033[0;31m");
-        color.push_back("\033[0;32m");
-        color.push_back("\033[0;35m");
-        color.push_back("\033[0;34m");
-        color.push_back("\033[0;36m");
+        color.push_back("\033[1;31m");
+        color.push_back("\033[1;32m");
+        color.push_back("\033[1;35m");
+        color.push_back("\033[1;34m");
+        color.push_back("\033[1;36m");
+        color.push_back("\033[1;37m");
+        color.push_back("\033[1;33m");
         
         for(uint32_t i = 0; i < bot.size(); ++i) {
             bot_data r;
@@ -73,6 +76,7 @@ public:
             r.alive = true;
             r.win = 0;
             r.draw = 0;
+            r.kills = 0;
             r.color = color[i%color.size()];
             data_.push_back(r);
         }
@@ -83,6 +87,7 @@ public:
         iter_ = 0;
         cturn_ = data_.size() - 1;
         N = size;
+        b_.clear();
         b_.resize(N, std::vector<field_struct>(N));
         maxiter_ = maxiter;
         for(int i = 0; i < N; ++i) {
@@ -114,7 +119,7 @@ public:
         
         for(uint32_t i = 0; i < data_.size(); ++i) {
             auto pos = int(i * N / M);
-            data_[i].pos = &get(pos, eng() % N);
+            data_[i].pos = &get(pos + eng() % 2, eng() % N);
             data_[i].pos->val.player = i;
             data_[i].alive = true;
         }
@@ -125,10 +130,25 @@ public:
            , data_.end()
            , [](auto const & a, auto const & b){ return a.bot.name() < b.bot.name(); });
     }
+    void sort_score() {
+        sort(data_.begin()
+           , data_.end()
+           , [&](auto const & a, auto const & b){ 
+               return score(a.win, a.draw, total_games_) 
+                    > score(b.win, b.draw, total_games_); 
+           });
+    }
+    void sort_kills() {
+        sort(data_.begin(), data_.end()
+           , [&](auto const & a, auto const & b){ 
+               return a.kills / (total_games_ - a.win - a.draw) > b.kills / (total_games_ - b.win - b.draw); 
+           });
+    }
     field_struct & get(int const & i, int const & j) {
         return b_[i][j];
     }
     void turn(std::mt19937 & eng) {
+        if(data_.size() == 0) throw std::runtime_error("No players on board!");
         cturn_ = (cturn_+1)%data_.size();
         
         if(cturn_ == 0)
@@ -149,8 +169,19 @@ public:
         // check if it beat another
         for(int i = 0; i < int(data_.size()); ++i) { // dont do that
             if(i != cturn_ and data_[i].alive) {
-                if(data_[i].pos  == data_[cturn_].pos)
+                if(data_[i].pos  == data_[cturn_].pos) {
                     data_[i].alive = false;
+                    // you can use these lines if you want to see who 
+                    // a bot wit a certain name dies
+                    //~ if(data_[i].bot.name() == "GD ultimate camper") {
+                        //~ data_[cturn_].pos->val.cnt = -1;
+                        //~ print_board();
+                        //~ std::cout << total_games_ << std::endl;
+                        //~ data_[cturn_].pos->val.cnt = iter_;
+                        //~ std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    //~ }
+                    ++data_[cturn_].kills;
+                }
             }
         }
         
@@ -189,11 +220,11 @@ public:
     std::string print_name(bot_data const & bd) const {
         return bd.color + bd.bot.name() + "\033[0m";
     }
-    void print_report(int const & games) const {
+    void print_report() const {
         if(verbose_ == 0)
             return;
         
-        std::cout << "Games played: " << games << std::endl;
+        std::cout << "Games played: " << total_games_ << std::endl;
         for(uint32_t i = 0; i < data_.size(); ++i) {
             std::cout << std::setw(10) << print_name(data_[i])
                       << ": " << 100 * data_[i].win / double(total_games_) << "% (draw: " 
@@ -207,8 +238,21 @@ public:
             std::cout << "\033[2J\033[100A";
     }
     void print_score() const {
+        std::cout << "score for " << total_games_ 
+                  << " games on size " << N << " arena:" << std::endl;
         for(uint32_t i = 0; i < data_.size(); ++i)
-            std::cout << "Score for " << print_name(data_[i]) << " = " << score(data_[i].win, data_[i].draw, total_games_) << " / 1000" << std::endl;
+            std::cout << std::setw(2) << i+1 << ": (" 
+                      << score(data_[i].win, data_[i].draw, total_games_) 
+                      << ") " << print_name(data_[i]) << std::endl;
+    
+    }
+    void print_kills() const {
+        std::cout << "kill/death-ratio for " << total_games_
+                  << " games on size " << N << " arena:" << std::endl;
+        for(uint32_t i = 0; i < data_.size(); ++i)
+            std::cout << std::setw(2) << i+1 << ": (" 
+                      << data_[i].kills / (total_games_ - data_[i].win - data_[i].draw) 
+                      << ") " << print_name(data_[i]) << std::endl;
     
     }
     void print_board() const {
@@ -221,7 +265,9 @@ public:
                 res = data_[val.player].color;
             if(val.player != no_player and val.cnt == (iter_-(cturn_<val.player)))
                 res += "\033[103m";
-            
+            if(val.cnt == -1)
+                res += "\033[101m";
+                
             return res;
         };
         std::string v;
@@ -235,6 +281,16 @@ public:
             }
             std::cout << std::endl << std::endl;
         }
+    }
+    std::vector<std::pair<std::string, int>> get_score() {
+        std::vector<std::pair<std::string, int>> res;
+        for(uint32_t i = 0; i < data_.size(); ++i) {
+            res.push_back(std::make_pair(data_[i].bot.name(), score(data_[i].win, data_[i].draw, total_games_)));
+        }
+        return res;
+    }
+    void set_verbose(int const & v) {
+        verbose_ = v;
     }
 private:
     

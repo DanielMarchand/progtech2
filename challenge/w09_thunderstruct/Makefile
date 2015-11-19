@@ -7,7 +7,7 @@ CPPFLAGS = -Wall -Wextra -Wpedantic -std=c++14 -O3
 
 all: arena
 
-arena: arena.cpp thunder_struct.hpp
+arena: arena.cpp thunder_struct.hpp all_bots.hpp mkoenz.hpp
 	$(CXX) $(CPPFLAGS) $^ -o $@
 
 clean:
