@@ -18,5 +18,6 @@ include_directories(${EXTERN})
 # ================ sub dirs
 enable_testing()
 add_subdirectory(src)
+add_subdirectory(doc)
 
 # ================ exes

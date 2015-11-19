@@ -1,12 +1,17 @@
-/*******************************************************************************
- *
- * PennaLV Test Main Function (functional test)
- * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
- * For free use, no rights reserved.
- *
+/** ****************************************************************************
+ * 
+ * \file
+ * \brief Main unit test
+ * \author Programming Techniques for Scientific Simulations II, ETH Zürich
+ * \date 2015
+ * \copyright For free use, no rights reserved, with no warranty whatsoever.
+ * \cond IMPLEMENTATION_DETAIL_DOC
+ * 
  ******************************************************************************/
+
 #include <zoo/bear.hpp>
 #include <zoo/sheep.hpp>
+#include <zoo/adapter.hpp>
 #include <simulation.hpp>
 #include <util/random.hpp>
 
@@ -16,7 +21,7 @@
 #include <catch.hpp>
 
 TEST_CASE("Functional Test of main", "[mainTest]") {
-// just put everything in a namespace i.o. not to pollute the global one
+    // just put everything in a namespace i.o. not to pollute the global one
     using namespace zoo;
     
     // seed random number generator engine
@@ -58,10 +63,10 @@ TEST_CASE("Functional Test of main", "[mainTest]") {
     param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
     param["threshold"] = std::to_string(sheep::prop.threshold);
     
-    sim::simulation<bear, sheep> pennaLV("pennaLV.txt"
-                                        , param
-                                        , N_max
-                                        , N_init);
+    sim::simulation<zoo_to_sim<bear>, zoo_to_sim<sheep>> pennaLV("pennaLV.txt"
+                                                                , param
+                                                                , N_max
+                                                                , N_init);
     
     pennaLV.run(300);
     

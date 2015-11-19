@@ -1,14 +1,21 @@
-// Author:  Mario S. Könz <mskoenz@gmx.net>
-// Date:    19.10.2015 11:35:03 CEST
-// File:    simulation_typedef.hpp
+/** ****************************************************************************
+ * 
+ * \file
+ * \brief Simulation typedef Definition
+ * \author Programming Techniques for Scientific Simulations II, ETH Zürich
+ * \date 2015
+ * \copyright For free use, no rights reserved, with no warranty whatsoever.
+ * 
+ ******************************************************************************/
 
-#ifndef SIMULATION_TYPEDEF_HEADER
-#define SIMULATION_TYPEDEF_HEADER
+#ifndef SIM_SIM_TYPEDEF_HEADER
+#define SIM_SIM_TYPEDEF_HEADER
 
 #include <array>
 
 namespace sim {
+    /// \brief used as return-value from animal_concept index()
     using count_type = uint64_t;
 }//end namespace 
 
-#endif //SIMULATION_TYPEDEF_HEADER
+#endif //SIM_SIM_TYPEDEF_HEADER

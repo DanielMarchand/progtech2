@@ -1,10 +1,15 @@
-/*******************************************************************************
- *
- * PennaLV Test for Sheep
- * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
- * For free use, no rights reserved.
- *
+/** ****************************************************************************
+ * 
+ * \file
+ * \brief PennaLV Unit test for zoo::sheep class
+ * \author Programming Techniques for Scientific Simulations II, ETH Zürich
+ * \date 2015
+ * \copyright For free use, no rights reserved, with no warranty whatsoever.
+ * 
+ * \cond IMPLEMENTATION_DETAIL_DOC
+ * 
  ******************************************************************************/
+
 #include <zoo/sheep.hpp>
 #include <zoo/animal_crtp.hpp>
 #include <sim_typedef.hpp>

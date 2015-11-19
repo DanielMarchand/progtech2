@@ -1,13 +1,15 @@
-/*******************************************************************************
- *
- * Simulation Class Declaration
- * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
- * For free use, no rights reserved.
- *
+/** ****************************************************************************
+ * 
+ * \file
+ * \brief Simulation Class Declaration
+ * \author Programming Techniques for Scientific Simulations II, ETH Zürich
+ * \date 2015
+ * \copyright For free use, no rights reserved, with no warranty whatsoever.
+ * 
  ******************************************************************************/
 
-#ifndef SIMULATION_HEADER
-#define SIMULATION_HEADER
+#ifndef SIM_SIMULATION_HEADER
+#define SIM_SIMULATION_HEADER
 
 #include <animal_concept.hpp>
 #include <sim_typedef.hpp>
@@ -19,8 +21,10 @@
 #include <fstream>
 #include <iostream>
 
+/// \brief foo
 namespace sim {
     //=================== simulation implementation ===================
+    /// \cond IMPLEMENTATION_DETAIL_DOC
     // variadic sim
     template<typename CA, typename... A>
     class simulation_impl;
@@ -28,6 +32,7 @@ namespace sim {
     //------------------- empty specialization -------------------
     template<typename CA>
     class simulation_impl<CA> {
+        // is the uppermost most class that holds all variables
         using count_array = CA;
     public:
         // structors
@@ -49,7 +54,7 @@ namespace sim {
         void of_print_index() {}
         void print() const {}
     protected:
-        // we need access from the sub-class
+        // we need access from the sub-class, thus protected
         std::ofstream of_;
         std::list<animal_concept<count_array>> pop_;
         count_array N_max_;
@@ -77,6 +82,8 @@ namespace sim {
                        , std::map<std::string, uint64_t> const & N_max
                        , std::map<std::string, uint64_t> const & N_init
         ): super(file, N_max, N_init) {
+            
+            // print name and init pop
             of_ << " " << A::name;
             N_init_[A::index] = N_init.at(A::name);
             N_max_[A::index] = N_max.at(A::name);
@@ -88,20 +95,27 @@ namespace sim {
         }
     protected:
         void of_print_index() {
+            // print your N_t after having called the base-fct
             super::of_print_index();
             of_ << " " << N_t_[A::index];
             
         }
         void print() const {
+            // also "recursive"
             super::print();
             std::cout << A::name << " count " << N_t_[A::index] << std::endl;
         }
     };
+    /// \endcond
     
     //=================== lowest class ===================
+    /**\brief A PennaLV simulation-class for one or more animals.
+     * \details This class takes one or more animal-classes as template 
+     * arguments and simulates the penna model for each animal plus 
+     * interactions specified by the animals 
+     * */
     template<typename A, typename... Rest>
     class simulation: public simulation_impl<typename A::count_array, A, Rest...> {
-        
         using super = simulation_impl<typename A::count_array, A, Rest...>;
     
     protected:
@@ -113,6 +127,18 @@ namespace sim {
             
     public:
         // structors
+        /**\brief only constructor for simulation
+         * \param file  should be a filename where the simulation-output should 
+         *        be written to. If the file arleady exists, it will be overwritten. 
+         * \param param  is a map of strings and just holds parameter that 
+         *        should be written to the file before the simulation starts. 
+         *        Could also be done in the main.cpp directly. 
+         * \param N_max  maps an animal-name (A::name) to the variable N_max for 
+         *        this animal. N_max is the carrying capacity for the penna model.
+         * \param N_init  maps an animal-name (A::name) to the variable N_init 
+         *        for this animal, which states with how many animals the 
+         *        simulation stats.
+         * */
         simulation( std::string const & file
                   , std::map<std::string, std::string> const & param
                   , std::map<std::string, uint64_t> const & N_max
@@ -129,6 +155,11 @@ namespace sim {
             of_ << std::endl;
         }
         // modifying methods
+        /**\brief runs the simulation
+         * \details run the simulation and write the data to the file specified 
+         *          in the constructer.
+         * \param N_generation  specifies how many generations will be simulated.
+         */
         void run(uint32_t const & N_generation) {
             for(uint32_t i = 0; i < N_generation; ++i) {
                 for(auto it = pop_.begin();  it != pop_.end(); ++it) {
@@ -161,6 +192,7 @@ namespace sim {
             of_.close();
         }
         // const methods
+        /// \brief prints the state of the simulation
         void print() const {
             // print population size
             super::print();
@@ -170,4 +202,4 @@ namespace sim {
     };
 }//end namespace sim
 
-#endif //SIMULATION_HEADER
+#endif //SIM_SIMULATION_HEADER

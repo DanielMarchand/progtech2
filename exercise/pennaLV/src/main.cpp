@@ -1,13 +1,21 @@
-// Author:  Mario S. Könz <mskoenz@gmx.net>
-// Date:    19.10.2015 10:44:57 CEST
-// File:    new_main.cpp
-
+/** ****************************************************************************
+ * 
+ * \file
+ * \brief Main program
+ * \author Programming Techniques for Scientific Simulations II, ETH Zürich
+ * \date 2015
+ * \copyright For free use, no rights reserved, with no warranty whatsoever.
+ * \details Demonstration for usage of simulation and animal libraries.
+ * \cond IMPLEMENTATION_DETAIL_DOC
+ * 
+ ******************************************************************************/
 
 //~ #include <util/profiler.hpp>
 
 #include <simulation.hpp>
 #include <zoo/bear.hpp>
 #include <zoo/sheep.hpp>
+#include <zoo/adapter.hpp>
 
 #include <map>
 #include <iostream>
@@ -59,10 +67,10 @@ int main() {
     //~ MIB_START("ctor")
     
     // we had to change the order of sheep and bear
-    sim::simulation<bear, sheep> pennaLV("pennaLV.txt"
-                                        , param
-                                        , N_max
-                                        , N_init);
+    sim::simulation<zoo_to_sim<bear>, zoo_to_sim<sheep>> pennaLV("pennaLV.txt"
+                                                                 , param
+                                                                 , N_max
+                                                                 , N_init);
     
     //~ MIB_NEXT("run")
     pennaLV.run(300);
@@ -73,7 +81,7 @@ int main() {
     //~ MIB_STOP("main")
     
     //~ MIB_PRINT("cycle")
-    //~ MIB_SAVE("cycle", "pennaLV_cycle.txt")
+    //~ MIB_SAVE("cycle", "pennaLV_variadic.txt")
     
     return 0;
 }
