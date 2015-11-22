@@ -38,6 +38,7 @@ directory and look at `html/index.html`) for a quick demo.
 Doxygen has a [comprehensive documentation](https://www.stack.nl/~dimitri/doxygen/manual/)
 and a useful [commands overview](https://www.stack.nl/~dimitri/doxygen/manual/commands.html),
 as well as [Markdown](https://daringfireball.net/projects/markdown/) support.
+You can also download a [Doxygen Cheat Sheet](Cheatsheet_Doxygen.pdf)
 
 #### Doxygen & CMake integration
 
