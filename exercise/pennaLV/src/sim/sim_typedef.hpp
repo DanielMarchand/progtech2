@@ -13,6 +13,7 @@
 
 #include <array>
 
+// documented in simulation.hpp
 namespace sim {
     /// \brief used as return-value from animal_concept index()
     using count_type = uint64_t;

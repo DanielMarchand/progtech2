@@ -17,34 +17,57 @@
 #include <memory>
 #include <iostream>
 
+// TODO: move to general helper header
+/// \brief This macro just warns the user once if it is encountered during runtime
+#define DEPRECATED(msg)            \
+static bool derpr_warned = false;  \
+if(not derpr_warned) {             \
+    derpr_warned = true;           \
+    std::clog << msg << std::endl; \
+}                                  //
+
 // documented in zoo.hpp
 namespace zoo {
 
     // typedefs (we still call them typedefs even if we dont use typedef)
     using age_type = uint32_t;   ///< &nbsp;
     using mut_type = uint32_t;   ///< &nbsp;
-
-    /** \brief Properties of an animal species
-     *  \details This used in zoo::animal_crtp (e.g. zoo::sheep) and must be initialised
-     *  by the user.\n\b Example:
-     *  ~~~{.cpp}
-     *      zoo::sheep::prop.repr_age = 8;
-     *  ~~~
-     */
-    struct species_properties {
-        age_type gene_size;     ///< genome length
-        age_type repr_age;      ///< age above which the animal is allowed to reproduce
-        mut_type threshold;     ///< number of bad genes that are survivable
-        mut_type mut_rate;      ///< rate of gene mutation
-    };
-
+    
     /** \brief CRTP base class for zoo animals
      *  \tparam T  Concrete type of animal to curiously recur upon.
      *  \details This class is used as base for zoo::sheep and zoo::bear.
      */
     template<typename T>
     class animal_crtp {
+        
+        struct gene_proxy_type { // should behave like an age_type
+            // the proxy can be casted implicitly to age_type
+            operator age_type() {
+                return gene_size_;
+            }
+            // and sets the gene_rng if the value is changed
+            gene_proxy_type & operator=(age_type const & gene_size) {
+                gene_size_ = gene_size;
+                gene_rng.set_range(0, gene_size_ - 1);
+                return (*this);
+            }
+            age_type gene_size_;
+        };
+        
         public:
+        /** \brief Properties of an animal species
+         *  \details This used in zoo::animal_crtp (e.g. zoo::sheep) and must be initialised
+         *  by the user.\n\b Example:
+         *  ~~~{.cpp}
+         *      zoo::sheep::prop.repr_age = 8;
+         *  ~~~
+         */
+        struct species_properties {
+            gene_proxy_type gene_size; ///< genome length
+            age_type repr_age;         ///< age above which the animal is allowed to reproduce
+            mut_type threshold;        ///< number of bad genes that are survivable
+            mut_type mut_rate;         ///< rate of gene mutation
+        };
         
         using count_array = std::array<uint64_t, zoo::tag::N_animal>; ///< &nbsp;
         
@@ -171,7 +194,13 @@ namespace zoo {
             return gene_rng();
         }
 
-        /** \brief Set gene size
+        /** \deprecated prop.gene_size is now a proxy that takes care of setting the
+         *  propper random number range.
+         *  ~~~{.cpp}
+         *      zoo::sheep::prop.gene_size = 2;
+         *  ~~~
+         *  works now perfectly fine.
+         *  \brief Set gene size
          *  \param gene_size  Length of the animal gene.
          *  \details This function must be used to set the species_properties::gene_size.\n
          *  If the gene_size of an animal is set directly via assignment operator,
@@ -188,6 +217,7 @@ namespace zoo {
          *  
          */
         static void set_gene_size(age_type const & gene_size) {
+            DEPRECATED("Warning: set_gene_size is marked as deprecated")
             prop.gene_size = gene_size;
             gene_rng.set_range(0, prop.gene_size - 1);
         }
@@ -213,7 +243,7 @@ namespace zoo {
 
     // static members
     template<typename T>
-    species_properties animal_crtp<T>::prop;
+    typename animal_crtp<T>::species_properties animal_crtp<T>::prop;
 
     // gene_rng has to be set again via set_gene_size
     template<typename T>

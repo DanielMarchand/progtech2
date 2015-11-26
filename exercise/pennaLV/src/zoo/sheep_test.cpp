@@ -11,8 +11,6 @@
  ******************************************************************************/
 
 #include <zoo/sheep.hpp>
-#include <zoo/animal_crtp.hpp>
-#include <sim/sim_typedef.hpp>
 #include <util/random.hpp>
 #include <vector>
 

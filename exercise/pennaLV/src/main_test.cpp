@@ -63,7 +63,7 @@ TEST_CASE("Functional Test of main", "[mainTest]") {
     param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
     param["threshold"] = std::to_string(sheep::prop.threshold);
     
-    sim::simulation<zoo_to_sim<bear>, zoo_to_sim<sheep>> pennaLV("pennaLV.txt"
+    sim::simulation<zoo_to_sim<sheep>, zoo_to_sim<bear>> pennaLV("pennaLV.txt"
                                                                 , param
                                                                 , N_max
                                                                 , N_init);

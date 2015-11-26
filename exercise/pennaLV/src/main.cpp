@@ -4,13 +4,14 @@
  * \brief Main program
  * \author Programming Techniques for Scientific Simulations II, ETH Zürich
  * \date 2015
- * \copyright For free use, no rights reserved, with no warranty whatsoever.
+ * \copyright Licensed under the Apache License. See COPYING for details.
  * \details Demonstration for usage of simulation and animal libraries.
  * \cond IMPLEMENTATION_DETAIL_DOC
  * 
  ******************************************************************************/
 
 #include <sim/simulation.hpp>
+#include <sim/simulation_flat.hpp>
 #include <zoo/bear.hpp>
 #include <zoo/sheep.hpp>
 #include <zoo/adapter.hpp>
@@ -28,7 +29,8 @@ int main() {
     std::map<std::string, uint64_t> N_init;
     std::map<std::string, uint64_t> N_max;
     // set up sheep parameters
-    sheep::set_gene_size(32);
+    sheep::set_gene_size(32);   // now deprecated
+    sheep::prop.gene_size = 32; // via proxy_type
     sheep::prop.repr_age = 8;
     sheep::prop.threshold = 3;
     sheep::prop.mut_rate = 2;
@@ -36,7 +38,7 @@ int main() {
     N_max[sheep::name] = 1000;
     
     // set up bear parameters
-    bear::set_gene_size(32);
+    bear::prop.gene_size = 32; // via proxy_type
     bear::prop.repr_age = 8;
     bear::prop.threshold = 3;
     bear::prop.mut_rate = 2;
@@ -47,25 +49,28 @@ int main() {
     
     param["seed"] = std::to_string(util::seed<>());
     
-    param["N_init_sheep"] = std::to_string(N_init[sheep::name]);
-    param["N_max_sheep"] = std::to_string(N_max[sheep::name]);
-    param["gene_size_sheep"] = std::to_string(sheep::prop.gene_size);
-    param["repr_age_sheep"] = std::to_string(sheep::prop.repr_age);
-    param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
-    param["threshold"] = std::to_string(sheep::prop.threshold);
+    // This template lambda removes my code duplication from before
+    auto fill_param = [&](auto a){
+        using A = decltype(a);
+        param["N_init_"    + A::name] = std::to_string(N_init[A::name]);
+        param["N_max_"     + A::name] = std::to_string(N_max[A::name]);
+        param["gene_size_" + A::name] = std::to_string(A::prop.gene_size);
+        param["repr_age_"  + A::name] = std::to_string(A::prop.repr_age);
+        param["mut_rate_"  + A::name] = std::to_string(A::prop.mut_rate);
+        param["threshold_" + A::name] = std::to_string(A::prop.threshold);
+    };
     
-    param["N_init_sheep"] = std::to_string(N_init[sheep::name]);
-    param["N_max_sheep"] = std::to_string(N_max[sheep::name]);
-    param["gene_size_sheep"] = std::to_string(sheep::prop.gene_size);
-    param["repr_age_sheep"] = std::to_string(sheep::prop.repr_age);
-    param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
-    param["threshold"] = std::to_string(sheep::prop.threshold);
+     // I need an instance to infuse the type to the template-lambda
+     // I dont want to write a normal template, bc [&] is too convenient :)
+    fill_param(sheep());
+    fill_param(bear());
     
     //~ MIB_START("main")
     //~ MIB_START("ctor")
     
-    // we had to change the order of sheep and bear
-    sim::simulation<zoo_to_sim<bear>, zoo_to_sim<sheep>> pennaLV("pennaLV.txt"
+    // now the order of sheep and bear is fine again
+    // rename simulation to simulation_flat to test the other implementation
+    sim::simulation<zoo_to_sim<sheep>, zoo_to_sim<bear>> pennaLV("pennaLV.txt"
                                                                  , param
                                                                  , N_max
                                                                  , N_init);

@@ -13,6 +13,7 @@
 
 #include <animal_concept.hpp>
 #include <sim_typedef.hpp>
+#include <type_list.hpp>
 
 //~ #include <util/profiler.hpp>
 
@@ -21,7 +22,7 @@
 #include <fstream>
 #include <iostream>
 
-/// \brief foo
+/// \brief holds the simulation and animal concept needed for a pennaLV simulation.
 namespace sim {
     //=================== simulation implementation ===================
     /// \cond IMPLEMENTATION_DETAIL_DOC
@@ -106,6 +107,16 @@ namespace sim {
             std::cout << A::name << " count " << N_t_[A::index] << std::endl;
         }
     };
+    
+    //=================== reversed simulation_impl ===================
+    // make a list with the animals, reverse the list and infuse it back
+    template<typename CA, typename... Rest>
+    using simulation_reverse = mtp::infuse_list<
+                                   simulation_impl
+                                 , mtp::reverse_list<
+                                       mtp::make_list<Rest..., CA>
+                                                   >
+                                               >;
     /// \endcond
     
     //=================== lowest class ===================
@@ -115,8 +126,8 @@ namespace sim {
      * interactions specified by the animals 
      * */
     template<typename A, typename... Rest>
-    class simulation: public simulation_impl<typename A::count_array, A, Rest...> {
-        using super = simulation_impl<typename A::count_array, A, Rest...>;
+    class simulation: public simulation_reverse<typename A::count_array, A, Rest...> {
+        using super = simulation_reverse<typename A::count_array, A, Rest...>;
     
     protected:
         using super::of_;
