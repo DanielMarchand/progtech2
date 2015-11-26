@@ -1,11 +1,11 @@
-## New 12.11.2015
-* [Slides Week 10](slides/pt2_hs15_week10)
-* [Exercise Sheet Week 10](task_sheets/pt2_hs15_ex10.pdf)
+## New 26.11.2015
+* [Slides Week 11](slides/pt2_hs15_week11.pdf)
+* [Exercise Sheet Week 11](task_sheets/pt2_hs15_ex11.pdf)
+* [Ackermann skeleton](exercise/ackermann/ackermann.cpp)
 * [PennaLV Code Solution](exercise/pennaLV)
-* [Licensing Update](wiki/licensing.md)
-* [Documentation Update](wiki/documentation.md)
-* [Serialisation Update](wiki/serialization.md)
-* [Challenge Solution ](challenge/w09_thunder_struct)
+* [Serialisation Update](wiki/storage_serialization.md)
+* [Challenge Solution](challenge/w10_property)
+* [Doxygen Cheatsheet](wiki/Cheatsheet_Doxygen.pdf)
 
 ## Content
 
