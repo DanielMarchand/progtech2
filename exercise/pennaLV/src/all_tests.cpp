@@ -2,7 +2,7 @@
  *
  * PennaLV Main function which runs all tests
  * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
- * For free use, no rights reserved.
+ * Licensed under the Apache License. See COPYING for details.
  *
  ******************************************************************************/
 

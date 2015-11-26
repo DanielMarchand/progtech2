@@ -4,7 +4,7 @@
  * \brief Animal Concept Definition
  * \author Programming Techniques for Scientific Simulations II, ETH Zürich
  * \date 2015
- * \copyright For free use, no rights reserved, with no warranty whatsoever.
+ * \copyright Licensed under the Apache License. See COPYING for details.
  * 
  ******************************************************************************/
 

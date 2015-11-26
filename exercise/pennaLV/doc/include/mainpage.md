@@ -5,7 +5,7 @@
 Year      | Name
 :-------: | -------------
 2015 | Programming Techniques for Scientific Simulations II, ETH Zürich
-\copyright For free use, no rights reserved, with no warranty whatsoever.
+\copyright Licensed under the Apache License. See COPYING for details.
 
 The aim of this framework is to simulate the Penna model 
 (http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2789689/)
