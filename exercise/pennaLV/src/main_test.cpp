@@ -49,19 +49,21 @@ TEST_CASE("Functional Test of main", "[mainTest]") {
     
     param["seed"] = std::to_string(util::seed<>());
     
-    param["N_init_sheep"] = std::to_string(N_init[sheep::name]);
-    param["N_max_sheep"] = std::to_string(N_max[sheep::name]);
-    param["gene_size_sheep"] = std::to_string(sheep::prop.gene_size);
-    param["repr_age_sheep"] = std::to_string(sheep::prop.repr_age);
-    param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
-    param["threshold"] = std::to_string(sheep::prop.threshold);
+    // This template lambda removes my code duplication from before
+    auto fill_param = [&](auto a){
+        using A = decltype(a);
+        param["N_init_"    + A::name] = std::to_string(N_init[A::name]);
+        param["N_max_"     + A::name] = std::to_string(N_max[A::name]);
+        param["gene_size_" + A::name] = std::to_string(A::prop.gene_size);
+        param["repr_age_"  + A::name] = std::to_string(A::prop.repr_age);
+        param["mut_rate_"  + A::name] = std::to_string(A::prop.mut_rate);
+        param["threshold_" + A::name] = std::to_string(A::prop.threshold);
+    };
     
-    param["N_init_sheep"] = std::to_string(N_init[sheep::name]);
-    param["N_max_sheep"] = std::to_string(N_max[sheep::name]);
-    param["gene_size_sheep"] = std::to_string(sheep::prop.gene_size);
-    param["repr_age_sheep"] = std::to_string(sheep::prop.repr_age);
-    param["mut_rate_sheep"] = std::to_string(sheep::prop.mut_rate);
-    param["threshold"] = std::to_string(sheep::prop.threshold);
+    // I need an instance to infuse the type to the template-lambda
+    // I dont want to write a normal template, bc [&] is too convenient :)
+    fill_param(sheep());
+    fill_param(bear());
     
     sim::simulation<zoo_to_sim<sheep>, zoo_to_sim<bear>> pennaLV("pennaLV.txt"
                                                                 , param
