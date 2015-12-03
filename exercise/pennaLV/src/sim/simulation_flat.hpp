@@ -13,11 +13,13 @@
 
 #include <animal_concept.hpp>
 #include <sim_typedef.hpp>
+#include <hdf5_support.hpp>
 
 //~ #include <util/profiler.hpp>
 
 #include <map>
 #include <list>
+#include <vector>
 #include <fstream>
 #include <iostream>
 
@@ -43,16 +45,32 @@ namespace sim {
     public:
         using count_array = typename detail::first_of<Args...>::type::count_array;
         // structors
-        /// \brief see simulation::simulation
+        /**\brief only constructor for simulation
+         * \param file  should be a filename where the simulation-output should 
+         *        be written to.
+         * \param param  is a map of strings and just holds parameter that 
+         *        should be written to the file before the simulation starts. 
+         *        Could also be done in the main.cpp directly. 
+         * \param N_max  maps an animal-name (A::name) to the variable N_max for 
+         *        this animal. N_max is the carrying capacity for the penna model.
+         * \param N_init  maps an animal-name (A::name) to the variable N_init 
+         *        for this animal, which states with how many animals the 
+         *        simulation stats.
+         * \param h5set if this parameter is given, the simulation will write in hdf5
+         *        instead of txt. The name of the hdf5-dataset will be given by this parameter.
+         * */
         simulation_flat( std::string const & file
-                       , std::map<std::string, std::string> const & param
+                       , std::map<std::string, int> const & param
                        , std::map<std::string, uint64_t> const & N_max
                        , std::map<std::string, uint64_t> const & N_init
-        ): of_(file)
+                       , std::string const & h5dset = ""
+        ): file_(file)
+         , h5dset_(h5dset)
+         , param_(param)
          , N_max_()
          , N_init_()
-         , N_t_() {
-            
+         , N_t_()
+        {
             auto init_N = [&]( count_type const & idx
                              , uint64_t const & init
                              , uint64_t const & max) {
@@ -61,24 +79,11 @@ namespace sim {
                                  return 0; // is needed bc of pass trick
                              };
             detail::pass{init_N(Args::index, N_init.at(Args::name), N_max.at(Args::name))...};
-            
-            of_ << "time";
-            auto write_name = [&](std::string const & s){of_ << " " << s; return 0;};
-            
-            // {} instead of () is extremely important with this technique
-            detail::pass{write_name(Args::name)...};
-            
-            of_ << "#param";
-            for(auto const & p: param)
-                of_ << " " << p.first << " " << p.second;
-            of_ << std::endl;
-
             detail::pass{init_pop_helper<Args>()...};
         }
         // modifying methods
         /// \brief see simulation::run
         void run(uint32_t const & N_generation) {
-            auto write_N_t = [&](const int idx){of_ << " " << N_t_[idx]; return 0;};
             for(uint32_t i = 0; i < N_generation; ++i) {
                 for(auto it = pop_.begin();  it != pop_.end(); ++it) {
                     auto & ap = (*it);
@@ -102,12 +107,13 @@ namespace sim {
                     }
                 }
                 //~ MIB_START("of")
-                of_ << i << " ";
-                detail::pass{write_N_t(Args::index)...};
-                of_ << std::endl;
+                res_.push_back(std::vector<uint64_t>{i, N_t_[Args::index]...});
                 //~ MIB_STOP("of")
             }
-            of_.close();
+            if(h5dset_ == "")
+                write_txt();
+            else
+                write_hdf5();
         }
         // const methods
         /// \brief see simulation::print
@@ -118,6 +124,29 @@ namespace sim {
                 std::cout << "last " << pop_.back() << std::endl;
         }
     private:
+        void write_txt() {
+            std::ofstream of(file_);
+            
+            of << "time";
+            auto write_name = [&](std::string const & s){of << " " << s; return 0;};
+            
+            // {} instead of () is extremely important with this technique
+            detail::pass{write_name(Args::name)...};
+            
+            of << "#param";
+            for(auto const & p: param_)
+                of << " " << p.first << " " << p.second;
+            of << std::endl;
+            
+            for(auto const & line: res_) {
+                for(auto const & elem: line)
+                    of << elem << " ";
+                of << std::endl;
+            }
+        }
+        void write_hdf5() {
+            to_hdf5(file_, h5dset_, res_, param_);
+        }
         // helper functions that only take type A
         template<typename A>
         int init_pop_helper() {
@@ -133,7 +162,11 @@ namespace sim {
             return 0; // is needed bc of pass trick
         }
     private:
-        std::ofstream of_;
+        std::string file_;
+        std::string h5dset_;
+        std::vector<std::vector<uint64_t>> res_;
+        std::map<std::string, int> const param_;
+        
         std::list<animal_concept<count_array>> pop_;
         count_array N_max_;
         count_array N_init_;

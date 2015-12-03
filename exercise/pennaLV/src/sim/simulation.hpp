@@ -151,7 +151,7 @@ namespace sim {
          *        simulation stats.
          * */
         simulation( std::string const & file
-                  , std::map<std::string, std::string> const & param
+                  , std::map<std::string, int> const & param
                   , std::map<std::string, uint64_t> const & N_max
                   , std::map<std::string, uint64_t> const & N_init
         ): super(file, N_max, N_init) {
@@ -160,7 +160,7 @@ namespace sim {
             of_ << "#param";
             
             for(auto const & p: param) {
-                of_ << " " << p.first << " " << p.second;
+                of_ << " " << p.first << " " << std::to_string(p.second);
             }
             
             of_ << std::endl;

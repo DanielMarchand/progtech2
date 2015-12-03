@@ -64,6 +64,7 @@ namespace util {
             process_stop(name, get_cyc());
         }
         void print_tree() const {
+            auto prec = std::cout.precision();
             std::cout << "Usage of rdtsc (CPU bound):" << std::endl;
             std::vector<bool> marker;
             std::string msm_mod_str = mod_ == msm_mod::cycle ? "cycle_mean" : "nsec_mean";
@@ -84,6 +85,7 @@ namespace util {
                                  , p->acc[mod].mean() * p->acc[mod].count()
                                  );
             }
+            std::cout.precision(prec);
         }
         void set_mod(std::string const & smod = "cycle") {
             if(smod == "cycle")
@@ -246,28 +248,39 @@ namespace util {
     
 }//end namespace util
 
-#define MIB_START(name)                 \
-util::detail::mib_prof.timer_.stop();   \
-util::detail::mib_prof.start(name);     \
-util::detail::mib_prof.timer_.start();  //
+#ifndef NMIB
+    #define MIB_START(name)                 \
+    util::detail::mib_prof.timer_.stop();   \
+    util::detail::mib_prof.start(name);     \
+    util::detail::mib_prof.timer_.start();  //
 
-#define MIB_STOP(name)                  \
-util::detail::mib_prof.timer_.stop();   \
-util::detail::mib_prof.stop(name);      \
-util::detail::mib_prof.timer_.start();  //
+    #define MIB_STOP(name)                  \
+    util::detail::mib_prof.timer_.stop();   \
+    util::detail::mib_prof.stop(name);      \
+    util::detail::mib_prof.timer_.start();  //
 
-#define MIB_NEXT(name)                  \
-util::detail::mib_prof.timer_.stop();   \
-util::detail::mib_prof.next(name);      \
-util::detail::mib_prof.timer_.start();  //
+    #define MIB_NEXT(name)                  \
+    util::detail::mib_prof.timer_.stop();   \
+    util::detail::mib_prof.next(name);      \
+    util::detail::mib_prof.timer_.start();  //
 
-#define MIB_PRINT(mod)                  \
-util::detail::mib_prof.set_mod(mod);    \
-util::detail::mib_prof.print_tree();    //
+    #define MIB_PRINT(mod)                  \
+    util::detail::mib_prof.set_mod(mod);    \
+    util::detail::mib_prof.print_tree();    //
 
-#define MIB_SAVE(mod, file)             \
-util::detail::mib_prof.set_mod(mod);    \
-util::detail::mib_prof.save(file);      //
+    #define MIB_SAVE(mod, file)             \
+    util::detail::mib_prof.set_mod(mod);    \
+    util::detail::mib_prof.save(file);      //
+#else
+    #define MIB_START(name) ;
 
+    #define MIB_STOP(name) ;
+
+    #define MIB_NEXT(name) ;
+
+    #define MIB_PRINT(mod) std::cout << "NMIB is defined, MIB deactivated" << std::endl;
+
+    #define MIB_SAVE(mod, file) std::cout << "NMIB is defined, MIB deactivated" << std::endl;
+#endif
 
 #endif //UTIL_PROFILER_HEADER

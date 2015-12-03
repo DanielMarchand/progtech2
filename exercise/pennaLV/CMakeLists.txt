@@ -7,6 +7,7 @@ set(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -Wpedantic")
 set(SRC ${PROJECT_SOURCE_DIR}/src)
 set(EXTERN ${PROJECT_SOURCE_DIR}/../extern/include)
 set(LIB zoo_lib)
+set(EXTLIB hdf5)
 
 # ================ enable testing (after the project is build: make test)
 enable_testing()

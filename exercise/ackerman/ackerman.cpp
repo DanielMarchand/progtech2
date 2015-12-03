@@ -1,6 +1,11 @@
-// Author:  Mario S. Könz <mskoenz@gmx.net>
-// Date:    25.11.2015 13:28:58 CET
-// File:    main.cpp
+/** ****************************************************************************
+ * 
+ * \file
+ * \brief Ackermann Example
+ * \author Programming Techniques for Scientific Simulations II, ETH Zürich
+ * \date 2015
+ * 
+ ******************************************************************************/
 
 // get the propper boost/archive and boost/serialization includes
 
@@ -9,7 +14,6 @@
 class {
 public:
     double operator()(double const & m, double const & n) {
-        double res = 0;
         if(m == 0)
             return n+1;
         else if(n == 0)

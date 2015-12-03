@@ -45,19 +45,19 @@ TEST_CASE("Functional Test of main", "[mainTest]") {
     N_init[bear::name] = 1000;
     N_max[bear::name] = 1000;
     
-    std::map<std::string, std::string> param;
+    std::map<std::string, int> param;
     
-    param["seed"] = std::to_string(util::seed<>());
+    param["seed"] = util::seed<>();
     
     // This template lambda removes my code duplication from before
     auto fill_param = [&](auto a){
         using A = decltype(a);
-        param["N_init_"    + A::name] = std::to_string(N_init[A::name]);
-        param["N_max_"     + A::name] = std::to_string(N_max[A::name]);
-        param["gene_size_" + A::name] = std::to_string(A::prop.gene_size);
-        param["repr_age_"  + A::name] = std::to_string(A::prop.repr_age);
-        param["mut_rate_"  + A::name] = std::to_string(A::prop.mut_rate);
-        param["threshold_" + A::name] = std::to_string(A::prop.threshold);
+        param["N_init_"    + A::name] = N_init[A::name];
+        param["N_max_"     + A::name] = N_max[A::name];
+        param["gene_size_" + A::name] = A::prop.gene_size;
+        param["repr_age_"  + A::name] = A::prop.repr_age;
+        param["mut_rate_"  + A::name] = A::prop.mut_rate;
+        param["threshold_" + A::name] = A::prop.threshold;
     };
     
     // I need an instance to infuse the type to the template-lambda
