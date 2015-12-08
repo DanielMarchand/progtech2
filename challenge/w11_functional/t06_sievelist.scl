@@ -1,0 +1,14 @@
+// Print every second element of a list
+// Programming Techniques for Scientific Simulations 2, ETH Zürich, 2015
+// Licensed under the Apache License (http://www.apache.org/licenses/LICENSE-2.0)
+//
+// run with
+//   scala t06_sievelist.scl
+
+val l = (1 to 20).toList  // use ordered list for clearer illustration
+
+val l2 = l.drop(1).grouped(2).map(_.head).toList
+println(l2 mkString " ")
+
+val longlist = Seq.fill(200)(scala.util.Random.nextInt)  // and a random list
+println(longlist.drop(1).grouped(2).map(_.head).toList mkString " ")

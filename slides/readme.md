@@ -21,3 +21,8 @@ Slides Week 09 will be handed out
 [Slides Week 10 boost::serialize](pt2_hs15_week10/pt2_hs15_week10_serialize.pdf)
 
 [Slides Week 10 boost::mpi](pt2_hs15_week10/pt2_hs15_week10_mpi.pdf)
+
+[Slides Week 11](pt2_hs15_week11.pdf)
+
+[Slides Week 12](pt2_hs15_week12.pdf)
+

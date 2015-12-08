@@ -17,6 +17,8 @@
 
 [Storage & Serialisation](storage_serialization.md)
 
+[Profiling](profiler.md)
+
 ### Exercise Tools
 
 [Micro Benchmark Demo](tools/exercise_extern_tools/measure_perf_demo.cpp) (check [exercise 07](task_sheets/pt2_hs15_ex07.pdf) to for the [profilerplot](exercise/extern/tools/profilerplot.py) explanation)
