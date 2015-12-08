@@ -28,6 +28,3 @@
 * somewhat fast
 * portability is no big concern
 
-## gprof, valgrind, vtune, perf, oprofile ...
-
-exercise: git bisect & profiler: performance turning point
