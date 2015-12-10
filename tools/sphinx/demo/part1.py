@@ -8,6 +8,8 @@
 class c1:
     """
     This is a very useful class to demonstrate how documantation works
+    
+    :ivar x: just a demonstration
     """
     def __init__ (self):
         """
@@ -16,6 +18,9 @@ class c1:
         self.x = 10
     
     def show_x_twice(self):
+        """
+        Just calls :meth:`show_x` twice
+        """
         self.show_x()
         self.show_x()
     
