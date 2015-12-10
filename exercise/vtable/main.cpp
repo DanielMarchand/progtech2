@@ -14,7 +14,7 @@
 struct growable_base { // polymorphic base class
     virtual ~growable_base() {}
 
-    virtual void print() = 0;
+    virtual void print() const = 0;
     virtual void grow(const double &) = 0;
 };
 
@@ -24,7 +24,7 @@ struct growable_impl : public growable_base { // concept holder
     growable_impl(T t) : t_(t) {}
     T t_;
 
-    void print() override { // concept implementation
+    void print() const override { // concept implementation
         t_.print();
     }
     void grow(const double & d) override { // concept implementation

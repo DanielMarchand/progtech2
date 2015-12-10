@@ -62,15 +62,15 @@ class OneDimVegetable {
         weight_ += d * D::linear_density_;
     }
 
-    inline void print() {
+    inline void print() const {
         std::cout << std::setprecision(3);
         std::cout << print_color(color_) << " " << D::get_name()
                   << ":\t\t length " << get_length()
                   << " cm, weight " << get_weight() << " g"  << std::endl;
     }
 
-    inline double get_length() { return length_; }
-    inline double get_weight() { return weight_; }
+    inline double get_length() const { return length_; }
+    inline double get_weight() const { return weight_; }
 
     protected:
     uint32_t age_ = 0;                         // hours
@@ -107,6 +107,10 @@ class Cucumber : public OneDimVegetable<Cucumber> {
     friend super;
     static const std::string get_name() {
         return "cucumber";
+    }
+    Cucumber & operator+=(const double d) {
+        grow(d);
+        return *this;
     }
     void expire() {
         if(age_ > expiration_time_) // rotten
