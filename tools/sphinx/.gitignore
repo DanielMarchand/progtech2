@@ -1,0 +1,5 @@
+doc/_*
+doc/*.rst
+doc/Makefile
+__pycache__
+**.pyc
