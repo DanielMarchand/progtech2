@@ -1,10 +1,9 @@
-## New 3.12.2015
-* [Slides Week 12](slides/pt2_hs15_week12.pdf)
-* [Exercise Sheet Week 12](task_sheets/pt2_hs15_ex12.pdf)
-* [PennaLV Code Solution](exercise/pennaLV)
-* [Ackermann Code Solution](exercise/ackermann)
-* [Profiler Discussion](wiki/profiler.md)
-* [Challenge Solution](challenge/w11_functional)
+## New 13.12.2015
+* Slides Week 13 will be handed out
+* [Exercise Sheet Week 13](task_sheets/pt2_hs15_ex13.pdf)
+* [PennaLV Python Code Solution](exercise/python)
+* [Documentation update (Sphinx)](wiki/documentation.md)
+* Challenge Solution (next week, due to running challenge in PT1)
 
 ## Content
 

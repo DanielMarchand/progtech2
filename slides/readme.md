@@ -26,3 +26,4 @@ Slides Week 09 will be handed out
 
 [Slides Week 12](pt2_hs15_week12.pdf)
 
+Slides Week 13 will be handed out

@@ -22,3 +22,5 @@
 
 [Exercise 12](pt2_hs15_ex12.pdf)
 
+[Exercise 13](pt2_hs15_ex13.pdf)
+
