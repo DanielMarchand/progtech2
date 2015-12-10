@@ -105,8 +105,30 @@ DOC_DIR has to be set in your `doc/CMakeLists.txt`:
 
     set(DOC_DIR ${PROJECT_SOURCE_DIR}/doc)  # needed in Doxyfile.in
 
+### Sphinx
+For python, we will use [Sphinx](http://sphinx-doc.org/) to generate the documantation.
+Instead of using [Markdown](https://daringfireball.net/projects/markdown/)
+it uses [reStructuredText](http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html)
+as markup. We provide a small example in [here](tools/sphinx/doc).
+The build process for the documentation is the following:
+
+- make a doc folder and enter it
+- call sphinx-quickstart and choose `yes` at the question `autodoc`
+    - this will generate multiple files, also `conf.py`
+- open the newly generated `conf.py` and import your source with
+    - `sys.path.insert(0, os.path.abspath(`path_to_demo`))`
+    - `import demo`
+- to generate all .rts files automatically, we call:
+    - `sphinx-apidoc path_to_demo -o path_to_doc`
+- finally we run `make html` and have our documantation
+
+#### Tweaks and Options
+
+The `conf.py` file lets you specify many options. A few as example:
+
+- Style: overwrite `html_theme` (see [html themes](http://sphinx-doc.org/theming.html) here)
+    - for example `html_theme = 'sphinx_rtd_theme'`
+- Documentation Order: `autodoc_member_order = "bysource"`
 
 ### Other documentation frameworks
-
 **[Doc++](http://docpp.sourceforge.net/)**: generates documentation for C, C++, IDL and Java<br />
-**[Sphinx](http://sphinx-doc.org/)**: a reStructuredText framework for Python
