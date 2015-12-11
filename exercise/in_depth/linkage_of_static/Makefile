@@ -25,10 +25,10 @@ all: what
 
 build/%.o: %.cpp
 	$(PREPARE_BUILD)
-	$(CXX) $(CPPFLAGS) $^ -c -o $@
+	$(CXX) $(CPPFLAGS) -c -o $@ $<
 
 clean:
-	rm -f build/*
+	rm -rf build
 
 what:
 	@echo "AVAILABLE TARGETS:"

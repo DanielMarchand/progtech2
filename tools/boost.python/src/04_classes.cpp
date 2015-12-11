@@ -35,7 +35,6 @@ std::ostream & operator<<(std::ostream & o, const Cucumber & c) {
     return o;
 }
 
-
 #include <boost/python.hpp>
 using namespace boost::python;
 
@@ -59,8 +58,8 @@ BOOST_PYTHON_MODULE(cppclass) {
         .def("name", &OneDimVegetable<Cucumber>::get_name)
         .def("print_", &OneDimVegetable<Cucumber>::print)
         .def(self += double())                                  // operator+=
+        .def(str(self))                                         // operator<<
         .def("__repr__", &OneDimVegetable<Cucumber>::get_name)
-        .def(str(self))
     ;
 
 }

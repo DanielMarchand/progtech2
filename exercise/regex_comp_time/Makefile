@@ -16,13 +16,12 @@ all: fast slow
 
 # Binary targets
 fast: fast.o reg.o reg.hpp
-	$(TIME) $(CXX) $(CPPFLAGS) $^ -o $@
+	$(TIME) $(CXX) $(CPPFLAGS) -o $@ $^
 slow: slow.o
-	$(TIME) $(CXX) $(CPPFLAGS) $^ -o $@
+	$(TIME) $(CXX) $(CPPFLAGS) -o $@ $^
 
-# Generic target for object binaries
-%.o: %.cpp
-	$(TIME) $(CXX) $(CPPFLAGS) $< -c
+# Generic target for object binaries, with Automatic Variables
+%.o: %.cpp ; $(TIME) $(CXX) $(CPPFLAGS) -c -o $@ $<
 
 # Cleanup
 clean:

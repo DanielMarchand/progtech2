@@ -23,21 +23,21 @@ all: lib/fib.so lib/fibboost.so embedded lib/cppclass.so
 # Binary shared object targets
 
 lib/fib.so: tmp/01_capi.o
-	$(TIME) $(CXX) $(CPPFLAGS) -shared $^ $(LDFLAGS) -o $@
+	$(TIME) $(CXX) -shared -o $@ $^ $(LDFLAGS)
 
 lib/fibboost.so: tmp/02_boostpy.o
-	$(TIME) $(CXX) $(CPPFLAGS) -shared $^ $(LDFLAGS) $(LDBOOST) -o $@
+	$(TIME) $(CXX) -shared -o $@ $^ $(LDFLAGS) $(LDBOOST)
 
 embedded: tmp/03_embed.o
-	$(TIME) $(CXX) $(CPPFLAGS) $^ $(LDFLAGS) $(LDBOOST) -o $@
+	$(TIME) $(CXX) -o $@ $^ $(LDFLAGS) $(LDBOOST)
 
 lib/cppclass.so: tmp/04_classes.o
-	$(TIME) $(CXX) $(CPPFLAGS) -shared $^ $(LDFLAGS) $(LDBOOST) -o $@
+	$(TIME) $(CXX) -shared -o $@ $^ $(LDFLAGS) $(LDBOOST)
 
-# Generic target for object binaries
+# Generic target for object binaries, with Automatic Variables
 tmp/%.o: src/%.cpp
 	@mkdir -p tmp
-	$(TIME) $(CXX) $(CPPFLAGS) $< -c -o $@
+	$(TIME) $(CXX) $(CPPFLAGS) -c -o $@ $<
 
 # Cleanup: set to initial state
 clean:

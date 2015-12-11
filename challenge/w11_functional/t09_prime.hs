@@ -5,7 +5,7 @@
 -- compile with
 --   ghc -outputdir ghc.tmp --make t09_prime.hs
 
-isPrime k = null [ x | x <- [2..k - 1], k `mod`x  == 0]
+isPrime k = null [ x | x <- [2..k - 1], k `mod` x  == 0]
 
 main = do
   print(isPrime(7))
