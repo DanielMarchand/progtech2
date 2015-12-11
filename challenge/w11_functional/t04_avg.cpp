@@ -12,15 +12,15 @@
 #include <iterator>
 
 /*******************************************************************************
- * List generator
+ * Compile time list generator
  */
 
 // so random!
 constexpr int super_random(int n) {
   return ((n+23)*(n+29))%100;
 }
-// return a std::array of size N
 
+// return a std::array of size N
 template<int N, int... VAL>
 constexpr typename std::enable_if<N == sizeof...(VAL), std::array<int, N>>::type
 rlist() {
@@ -60,8 +60,8 @@ int main() {
 
     constexpr auto longlist = rlist<200>();
     constexpr double avg2 = average(longlist);
-    std::cout << avg2 << std::endl;
     //~ std::copy(std::begin(longlist), std::end(longlist), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << avg2 << std::endl;
 
     return 0;
 
