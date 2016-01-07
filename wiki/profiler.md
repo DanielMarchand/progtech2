@@ -37,13 +37,13 @@ in cmake/ccmake.<br />
 To get a realistic picture, we also want to set the same full optimisation flags
 we use in the release version.
 
-#### gprof
+### gprof
 
 The [GNU profiler](https://sourceware.org/binutils/docs/gprof/) is a simple yet
 useful GNU/Linux-based compiler-level instrumentation profiler which requires
 `-pg` to be added to the compiler flags.<br />
 After compilation, executing the binary (e.g. `src/main`) will produce a statistical call
-graph profile called `gmon.out` in the current directory. We can then see the relations
+graph profile named `gmon.out` in the current directory. We can then see the relations
 between the symbol table of the binary and the execution profile by running
 
     gprof src/main > info.txt
@@ -53,7 +53,7 @@ and viewing `info.txt` (which contains three documented sections) in any text ed
 Further instructions, e.g. how to generate call graphs, can be found in the
 [gprof documentation](https://sourceware.org/binutils/docs/gprof/).
 
-#### perf
+### perf
 
 A versatile [Linux kernel performance counter](https://perf.wiki.kernel.org/index.php/Main_Page)
 tool for either specific binaries or the entire system.
@@ -83,7 +83,7 @@ Live analysis, code annotation, various benchmarks for schedulers or memory acce
 and many other features can be read up about in the
 [perf tutorial](https://perf.wiki.kernel.org/index.php/Tutorial).
 
-#### Valgrind
+### Valgrind
 
 [Valgrind](http://valgrind.org/) is a cross platform (GNU/Linux, OSX, Solaris)
 virtual machine used for [debugging](wiki/debugger.md) in a variety
@@ -115,7 +115,7 @@ Detailed explanation of the mentioned commands and a wealth of other application
 (e.g. generating call graphs) can be found in the
 [Valgrind manual](http://valgrind.org/docs/manual/manual.html).
 
-#### gcov & lcov
+### gcov & lcov
 
 gcov is a cross platform (Unix-like) code coverage and statement-level profiling
 tool from the GCC suite, used to generate line-by-line profiles, annotated source
@@ -144,8 +144,8 @@ Further information can be found in the [gcov documentation](https://gcc.gnu.org
 [lcov](http://ltp.sourceforge.net/coverage/lcov.php) is an extension to gcov,
 enabling the generation of pretty HTML output.
 
-Having run the binary with the `--coverage` flag, we can create a trace file and
-and use it to build a html documentation:
+Having run the binary compiled with the `--coverage` flag, we can create a trace
+file and and use it to build a html documentation:
 
     lcov --capture --directory src/CMakeFiles/main.dir/ --output-file cov.info
     genhtml cov.info --output-dir lcov_html
@@ -154,7 +154,7 @@ and use it to build a html documentation:
 This allows us to check in a convenient manner how much of the source code was
 executed how often (or at all) in a particular run.
 
-#### Other profilers
+### Other profilers
 
 There are many other profiling tools. A very popular choice is
 [Intel VTune](https://software.intel.com/en-us/intel-vtune), which can be obtained
