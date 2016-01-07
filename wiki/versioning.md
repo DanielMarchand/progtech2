@@ -23,6 +23,7 @@
 In this course we will use [Git](https://git-scm.com).<br /> 
 A [GitLab](https://gitlab.phys.ethz.ch) server is maintained by ETH D-PHYS, and there is a [global one](https://github.com).<br />
 A nice [tutorial](https://www.atlassian.com/git/tutorials/) can be found online.<br />
+We have seen a [git bisect example](tools/git/bisect.sh) in the lecture.
 
 ## Other version control systems
 

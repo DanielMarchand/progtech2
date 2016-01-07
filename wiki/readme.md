@@ -25,6 +25,8 @@
 
 [Type Printing Demo](tools/exercise_extern_tools/print_type_demo.cpp)
 
+[Git Bisect Example](tools/git/bisect.sh)
+
 ### Technical
 
 [vTable Lookup](vTable-lookup.pdf)
