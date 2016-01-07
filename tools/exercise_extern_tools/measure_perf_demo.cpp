@@ -1,6 +1,10 @@
-// Author:  Mario S. Könz <mskoenz@gmx.net>
-// Date:    21.10.2015 23:31:33 CEST
-// File:    measure_perf.cpp
+/*******************************************************************************
+ *
+ * Demo of the micro-benchmark profiler.
+ * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
+ * For free use, no rights reserved.
+ *
+ ******************************************************************************/
 
 #include <list>
 #include <vector>

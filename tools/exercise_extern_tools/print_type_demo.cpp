@@ -1,6 +1,10 @@
-// Author:  Mario S. Könz <mskoenz@gmx.net>
-// Date:    21.10.2015 23:50:00 CEST
-// File:    print_type_demo.cpp
+/*******************************************************************************
+ *
+ * Demo of the type printing macros.
+ * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
+ * For free use, no rights reserved.
+ *
+ ******************************************************************************/
 
 #include <iostream>
 

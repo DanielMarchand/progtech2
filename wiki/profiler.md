@@ -72,8 +72,8 @@ To generate a call graph visualisation, we record the stack chain / backtrace in
 
     perf record -g -- src/main
 
-Then we run the perf script command with c++filt (demangle C++ function names) and
-gprof2dot (dot grapher for, among others, perf; available via pip):
+Then we run the perf script command with `c++filt` (demangle C++ function names) and
+`gprof2dot` (dot grapher for, among others, perf; available via pip):
 
     perf script | c++filt | gprof2dot -f perf | dot -Tpng -o out.png
 
@@ -141,8 +141,8 @@ to see how many times each line in those files was executed.
 
 Further information can be found in the [gcov documentation](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html).
 
-[lcov](http://ltp.sourceforge.net/coverage/lcov.php) is an extension to gcov, allowing
-the generation of pretty html output.
+[lcov](http://ltp.sourceforge.net/coverage/lcov.php) is an extension to gcov,
+enabling the generation of pretty HTML output.
 
 Having run the binary with the `--coverage` flag, we can create a trace file and
 and use it to build a html documentation:
@@ -154,7 +154,7 @@ and use it to build a html documentation:
 This allows us to check in a convenient manner how much of the source code was
 executed how often (or at all) in a particular run.
 
-#### others
+#### Other profilers
 
 There are many other profiling tools. A very popular choice is
 [Intel VTune](https://software.intel.com/en-us/intel-vtune), which can be obtained

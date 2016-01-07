@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * Prints Type and as well as ref-ness / const-ness / volatile-ness
+ * RDTSC based micro-benchmark macros.
  * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
  * For free use, no rights reserved.
  *
