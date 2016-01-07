@@ -1,7 +1,10 @@
-// Author:  Mario S. Könz <mskoenz@gmx.net>, Donjan Rodic <donjan@dyx.ch>
-// Date:    05.09.2015 20:21:53 CEST
-// File:    profiler.hpp
-// License: WTFPL (http://sam.zoy.org/wtfpl/)
+/*******************************************************************************
+ *
+ * Prints Type and as well as ref-ness / const-ness / volatile-ness
+ * Programming Techniques for Scientific Simulations II, ETH Zürich, 2015
+ * For free use, no rights reserved.
+ *
+ ******************************************************************************/
 
 #ifndef UTIL_PROFILER_HEADER
 #define UTIL_PROFILER_HEADER
@@ -20,7 +23,7 @@
 #include <map>
 #include <functional>
 
-// todo: force inline->see no_macros_branch
+// todo: force inline -> see no_macros_branch
 
 
 namespace util {
