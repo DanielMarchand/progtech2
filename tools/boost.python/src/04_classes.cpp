@@ -35,6 +35,8 @@ std::ostream & operator<<(std::ostream & o, const Cucumber & c) {
     return o;
 }
 
+/******************************************************************************/
+
 #include <boost/python.hpp>
 using namespace boost::python;
 
