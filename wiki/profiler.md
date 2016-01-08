@@ -4,7 +4,7 @@
 
 * ___dynamic___ performance analysis in ___real___ world deployment
 * identify specific ___bottlenecks___, because:
-    - premature optimisation is evil
+    - premature optimisation is evil (80/20 rule: ~80% of the time is caused by ~20% of the code)
     - we strive for readability and maintainability
 
 ### What do we expect from our profiler?
@@ -26,7 +26,7 @@
 * automatic compiler / toolchain feedback
 * easy to use
 * somewhat fast
-* portability is no big concern
+* portability should not be a big concern
 
 ## Profiling tools
 
@@ -41,7 +41,7 @@ we use in the release version.
 
 The [GNU profiler](https://sourceware.org/binutils/docs/gprof/) is a simple yet
 useful GNU/Linux-based compiler-level instrumentation profiler which requires
-`-pg` to be added to the compiler flags.<br />
+`-pg` (specific support for gprof) to be added to the compiler flags.<br />
 After compilation, executing the binary (e.g. `src/main`) will produce a statistical call
 graph profile named `gmon.out` in the current directory. We can then see the relations
 between the symbol table of the binary and the execution profile by running
@@ -68,7 +68,7 @@ and reporting on it (type `?` while in the report tool for more info):
     perf record src/main
     perf report
 
-To generate a call graph visualisation, we record the stack chain / backtrace information:
+To generate a call graph visualisation, we record the stack chain / backtrace information (-g):
 
     perf record -g -- src/main
 
